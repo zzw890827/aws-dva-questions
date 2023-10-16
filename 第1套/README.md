@@ -271,247 +271,290 @@
 
     </details>
 
-21. A company runs its SAP Business Suite on SAP HANA systems on AWS. The company's production SAP ERP Central Component (SAP ECC) system uses an x1e.32xlarge (memory optimized) Amazon EC2 instance and is 3.5 TB in size. Because of expected future growth, the company needs to resize the production system to use a u-* EC2 High Memory instance. The company must resize the system as quickly as possible and must minimize downtime during the resize activities. Which solution will meet these requirements?
-    - [ ] A. Resize the instance by using the AWS Management Console or the AWS CLI.
-    - [ ] B. Create an AMI of the source system Launch a new EC2 High Memory instance that is based on that AMI.
-    - [ ] C. Launch a new EC2 High Memory instance. Install and configure SAP HANA on the new instance by using AWS Launch Wizard for SAP. Use SAP HANA system replication to migrate the data to the new instance.
-    - [ ] D. Launch a new EC2 High Memory instance. Install and configure SAP HANA on the new instance by using AWS Launch Wizard for SAP. Use SAP HANA backup and restore to back up the source system directly to Amazon S3 and to migrate the data to the new instance.
+21. A developer maintains an Amazon API Gateway REST API. Customers use the API through a frontend UI and Amazon Cognito authentication. The developer has a new version of the API that contains new endpoints and backward-incompatible interface changes. The developer needs to provide beta access to other developers on the team without affecting customers. Which solution will meet these requirements with the LEAST operational overhead?
+    - [ ] A. Define a development stage on the API Gateway API. Instruct the other developers to point the endpoints to the development stage.
+    - [ ] B. Define a new API Gateway API that points to the new API application code. Instruct the other developers to point the endpoints to the new API.
+    - [ ] C. Implement a query parameter in the API application code that determines which code version to call.
+    - [ ] D. Specify new API Gateway endpoints for the API endpoints that the developer wants to add.
 
     <details>
        <summary>Answer</summary>
 
-       C.
+       A.
 
     </details>
 
-22. A company deploys its SAP ERP system on AWS in a highly available configuration across two Availability Zones. The cluster is configured with an overlay IP address and a Network Load Balancer (NLB) to provide access to the SAP application layer to all users. The company's analytics team has created several Operational Data Provisioning (ODP) extractor services for the SAP ERP system. A highly available ETL system will call the ODP extractor services. The ETL system is hosted on Amazon EC2 instances that are deployed in an analytics VPC in a different AWS account. An SAP solutions architect needs to prevent the ODP extractor services from being used as an attack vector to overload the SAP ERP system. Which solution will provide the MOST protection for the ODP extractor services?
-    - [ ] A. Configure VPC peering between the SAP VPC and the analytics VPC. Use network ACL rules in the SAP VPC to allow traffic to the NLB from only authorized sources: the analytics VPC CIDR block and the SAP end users' network CIDR block.
-    - [ ] B. Create a transit gateway in the SAP account. Share the transit gateway with the analytics account. Attach the SAP VPC and the analytics VPC to the transit gateway. Use network ACL rules in the SAP VPC to allow traffic to the NLB from only authorized sources: the analytics VPC CIDR block and the SAP end users' network CIDR block.
-    - [ ] C. Configure VPC peering between the SAP VPC and the analytics VPUpdate the NLB security group rules to accept traffic only from authorized sources: the ETL instances CIDR block and the SAP end users' network CIDR block.
-    - [ ] D. Create a VPC endpoint service configuration on the SAP VPC. Specify the NLB in the endpoint configuration. In the analytics account, create an IAM role that has permission to create a connection to the endpoint service. Attach the role to the ETL instances. While logged in to the ETL instances, programmatically create an interface endpoint to the NLB. Accept the request to activate the interface connection.
+22. A developer is creating an application that will store personal health information (PHI). The PHI needs to be encrypted at all times. An encrypted Amazon RDS for MySQL DB instance is storing the data. The developer wants to increase the performance of the application by caching frequently accessed data while adding the ability to sort or rank the cached datasets. Which solution will meet these requirements?
+    - [ ] A. Create an Amazon ElastiCache for Redis instance. Enable encryption of data in transit and at rest. Store frequently accessed data in the cache.
+    - [ ] B. Create an Amazon ElastiCache for Memcached instance. Enable encryption of data in transit and at rest. Store frequently accessed data in the cache.
+    - [ ] C. Create an Amazon RDS for MySQL read replica. Connect to the read replica by using SSL. Configure the read replica to store frequently accessed data.
+    - [ ] D. Create an Amazon DynamoDB table and a DynamoDB Accelerator (DAX) cluster for the table. Store frequently accessed data in the DynamoDB table.
   
     <details>
        <summary>Answer</summary>
 
-       D.
-       VPC Endpoint Service + IAM Role: This is the most restrictive and secure approach. The VPC endpoint service allows you to expose a specific service (in this case, the NLB for SAP) to another VPC. By using IAM roles attached to the ETL instances, you can very tightly control which instances can access the SAP system. This would provide the most granular level of access control and thus the most protection against potential misuse of the ODP extractor services.
+       A.
+       - A. Amazon ElastiCache for Redis supports both encryption at rest and in transit. Additionally, Redis supports sorted data structures like Sorted Sets, which can be used for sorting or ranking datasets.
+       - B. Amazon ElastiCache for Memcached supports encryption in transit but does not support encryption at rest (as of my last update in January 2022). Therefore, it's not suitable for storing PHI data that needs to be encrypted at all times.
+       - C. Amazon RDS for MySQL read replica can be used to offload read traffic from the primary database, but it doesn't serve as a caching layer like ElastiCache. Also, while connecting with SSL provides encryption in transit, it doesn't necessarily improve cache-like performance for frequently accessed data.
+       - D. Amazon DynamoDB with DAX is a caching solution for DynamoDB, but the architecture is more suited for applications that already leverage DynamoDB as the primary database. If you're not already using DynamoDB, introducing it solely for caching may be overkill. Additionally, DAX provides in-memory caching, so you would have to ensure the in-memory data is also encrypted.
 
     </details>
 
-23. A company wants to migrate a native SAP HANA database to AWS. The database ingests large amounts of data every month, and the size of the database is growing rapidly. The company needs to store data for 10 years to meet a regulatory requirement. The company uses data from the last 2 years frequently in several reports. This recent data is critical and must be accessed quickly. The data that is 3-6 years old is used a few times a year and can be accessed in a longer time frame. The data that is more than 6 years old is rarely used and also can be accessed in a longer time frame. Which combination of steps will meet these requirements? (Choose three.)
-    - [ ] A. Keep the frequently accessed data from the last 2 years in a hot tier on an SAP HANA certified Amazon EC2 instance.
-    - [ ] B. Move the frequently accessed data from the last 2 years to SAP Information Life Cycle Management (ILM) with SAP IQ.
-    - [ ] C. Move the less frequently accessed data that is 3-6 years old to a warm tier on Amazon Elastic File System (Amazon EFS) by using SAP HANA dynamic tiering.
-    - [ ] D. Move the less frequently accessed data that is 3-6 years old to a warm tier on Amazon Elastic File System (Amazon EFS) by using data aging.
-    - [ ] E. Move the rarely accessed data that is more than 6 years old to a cold tier on Amazon S3 by using SAP Data Hub.
-    - [ ] F. Move the rarely accessed data that is more than 6 years old to a cold tier on SAP BW Near Line Storage (NLS) with Apache Hadoop.
-
-    <details>
-       <summary>Answer</summary>
-
-       ACE.
-
-    </details>
-
-24. An SAP engineer is designing a storage configuration for an SAP S/4HANA production system on AWS. The system will run on an Amazon EC2 instance with a memory size of 2 TB. The SAP HANA sizing report recommends storage of 2,400 GB for data and 512 GB for logs. The system requires 9,000 IOPS for data storage and throughput of 300 MBps for log storage. Which Amazon Elastic Block Store (Amazon EBS) volume configuration will meet these requirements MOST cost-effectively?
-    - [ ] A. For /hana/data, use two 900 GB Provisioned IOPS SSD (io1) EBS volumes that are configured with RAID 0 striping and the required IOPS. For /hana/log, use one 512 GB General Purpose SSD (gp3) EBS volume that is configured with the required throughput.
-    - [ ] B. For /hana/data, use one 2,400 GB General Purpose SSD (gp3) EBS volume that is configured with the required IOPS. For /hana/log, use one 512 GB gp3 EBS volume that is configured with the required throughput.
-    - [ ] C. For /hana/data use two 1,200 GB Provisioned IOPS SSD (io2) EBS volumes that are configured with RAID 0 striping and the required IOPS. For /hana/log, use one 525 GB io2 EBS volume that is configured with the required throughput.
-    - [ ] D. For /hana/data, use two 1,200 GB General Purpose SSD (gp3) EBS volumes that are configured with RAID 0 striping and the required IOPS. For /hana/log, use one 512 GB gp3 EBS volume that is configured with the required throughput.
-
-    <details>
-       <summary>Answer</summary>
-
-       B.
-
-    </details>
-
-25. A company is running SAP on premises and is using hard disk drive (HDD) cost-optimized storage to store SAP HANA archive files. The company directly mounts these disks as local file systems. The company also backs up the archives on a regular basis. The company needs to migrate this setup to AWS. Which solution will meet these requirements MOST cost-effectively?
-    - [ ] A. Use General Purpose SSD (gp2) Amazon Elastic Block Store (Amazon EBS) volumes as the archive destination. Use Amazon S3 for backups. Use S3 Glacier for long-term retention of the archives.
-    - [ ] B. Use Provisioned IOPS SSD (io1) Amazon Elastic Block Store (Amazon EBS) volumes as the archive destination. Back up the archives to Cold HDD (sc1) EBS volumes.
-    - [ ] C. Use Provisioned IOPS SSD (io1) Amazon Elastic Block Store (Amazon EBS) volumes as the archive destination. Use Amazon S3 for backups. Use S3 Glacier for long-term retention of the archives.
-    - [ ] D. Use Cold HDD (sc1) Amazon Elastic Block Store (Amazon EBS) volumes as the archive destination. Use Amazon S3 for backups. Use S3 Glacier for long-term retention or the archives.
-    <details>
-       <summary>Answer</summary>
-
-       D.
-
-    </details>
-
-26. A company recently migrated its SAP workload to AWS. The company's SAP engineer implements SAProuter on an Amazon EC2 instance that runs SUSE Linux Enterprise Server. The EC2 instance is in a public subnet and is an On-Demand Instance. The SAP engineer performs all the necessary configurations for SAProuter, security groups, and route tables. The SAProuter system needs to be online and available only when SAP Support is needed. The SAP engineer performs an initial test to validate SAP Support connectivity with SAProuter. The test is successful, and the SAP engineer stops the EC2 instance. When an event occurs that causes the company to need SAP Support, the company starts the EC2 instance that hosts SAProuter. After the EC2 instance is running, the SAP Support team cannot establish connectivity with SAProuter. What should the SAP engineer do to permanently resolve this issue?
-    - [ ] A. Re-install SAProuter on an EC2 instance in a private subnet. Update the SAProuter configuration with the instance's private IP address. Deploy a managed NAT gateway for AWS. Route SAP connectivity through the NAT gateway.
-    - [ ] B. Allocate an Elastic IP address to the EC2 instance that hosts SAProuter. Update the SAP router configuration with the Elastic IP address.
-    - [ ] C. Modify the security group that is associated with the EC2 instance that hosts SAProuter to allow access to all ports from the 0.0.0.0/0 CIDR block.
-    - [ ] D. Update the SAProuter configuration with the private IP address of the EC2 instance that hosts SAProuter.
-
-    <details>
-       <summary>Answer</summary>
-
-       B.
-    </details>
-
-27. A company wants to deploy an SAP HANA database on AWS by using AWS Launch Wizard for SAP. An SAP solutions architect needs to run a custom post-deployment script on the Amazon EC2 instance that Launch Wizard provisions. Which actions can the SAP solutions architect take to provide the post-deployment script in the Launch Wizard console? (Choose two.)
-    - [ ] A. Provide the FTP URL of the script.
-    - [ ] B. Provide the HTTPS URL of the script on a web server.
-    - [ ] C. Provide the Amazon S3 URL of the script.
-    - [ ] D. Write the script inline.
-    - [ ] E. Upload the script.
-    <details>
-       <summary>Answer</summary>
-
-       CE.
-
-    </details>
-
-28. A company is evaluating options to migrate its on-premises SAP ERP Central Component (SAP ECC) EHP 8 system to AWS. The company does not want to make any changes to the SAP versions or database versions. The system runs on SUSE Linux Enterprise Server and SAP HANA 2.0 SPS 05. The existing on-premises system has a 1 TB database. The company has 1 Gbps or internet bandwidth available for the migration. The company must complete the migration with the least possible downtime and disruption to business. Which solution will meet these requirements?
-    - [ ] A. Install SAP ECC EHP 8 on Amazon EC2 instances. Use the same SAP SID and kernel version that the source system uses. Install SAP HANA on EC2 instances. Use the same version of SAP HANA that the source system uses. Take a full backup of the source SAP HANA database to disk. Copy the backup by using an AWS Storage Gateway Tape Gateway. Restore the backup on the target SAP HANA instance that is running on Amazon EC2.
-    - [ ] B. Install SAP ECC EHP 8 on Amazon EC2 instances. Use the same SAP SID and kernel version that the source system uses. Install SAP HANA on EC2 instances. Use the same version of SAP HANA that the source database uses. Establish replication at the source, and register the SAP HANA instance that is running on Amazon EC2 as secondary. After the systems are synchronized, initiate a takeover so that the SAP HANA instance that is running on Amazon EC2 becomes primary. Shut down the on-premises system. Start SAP on the EC2 instances.
-    - [ ] C. Install SAP ECC EHP 8 on Amazon EC2 instances. Use the same SAP SID and kernel version that the source system uses. Install SAP HANA on EC2 instances. Use the same version that the source system uses. Take a full offline backup of the source SAP HANA database. Copy the backup to Amazon S3 by using the AWS CLI. Restore the backup on a target SAP HANA instance that runs on Amazon EC2. Start SAP on the EC2 instances.
-    - [ ] D. Take an offline SAP Software Provisioning Manager export of the on-premises system. Use an AWS Storage Gateway File Gateway to transfer the export. Import the export on Amazon EC2 instances to create the target SAP system.
-
-    <details>
-       <summary>Answer</summary>
-
-       B.
-
-    </details>
-
-29. A company has deployed SAP workloads on AWS. The company's SAP applications use an IBM Db2 database and an SAP HANA database. An SAP solutions architect needs to create a solution to back up the company's databases. Which solution will meet these requirements MOST cost-effectively?
-    - [ ] A. Use an Amazon Elastic Block Store (Amazon EBS) volume to store backups for the databases. Run a periodic script to move the backups to Amazon S3 and to delete the backups from the EBS volume.
-    - [ ] B. Use AWS Backint Agent for SAP HANA to move the backups for the databases directly to Amazon S3.
-    - [ ] C. Use an Amazon Elastic Block Store (Amazon EBS) volume to store backups for the Db2 database. Run periodic scripts to move the backups to Amazon S3 and to delete the backups from the EBS volume. For the SAP HANA database, use AWS Backint Agent for SAP HANA to move the backups directly to Amazon S3.
-    - [ ] D. Use Amazon Elastic File System (Amazon EFS) to store backups for the databases.
+23. A company has a multi-node Windows legacy application that runs on premises. The application uses a network shared folder as a centralized configuration repository to store configuration files in .xml format. The company is migrating the application to Amazon EC2 instances. As part of the migration to AWS, a developer must identify a solution that provides high availability for the repository. Which solution will meet this requirement MOST cost-effectively?
+    - [ ] A. Mount an Amazon Elastic Block Store (Amazon EBS) volume onto one of the EC2 instances. Deploy a file system on the EBS volume. Use the host operating system to share a folder. Update the application code to read and write configuration files from the shared folder.
+    - [ ] B. Deploy a micro EC2 instance with an instance store volume. Use the host operating system to share a folder. Update the application code to read and write configuration files from the shared folder.
+    - [ ] C. Create an Amazon S3 bucket to host the repository. Migrate the existing .xml files to the S3 bucket. Update the application code to use the AWS SDK to read and write configuration files from Amazon S3.
+    - [ ] D. Create an Amazon S3 bucket to host the repository. Migrate the existing xml files to the S3 bucket. Mount the S3 bucket to the EC2 instances as a local volume. Update the application code to read and write configuration files from the disk.
 
     <details>
        <summary>Answer</summary>
 
        C.
-        AWS Backint Agent for SAP HANA is designed to backup SAP HANA databases directly to Amazon S3. This solution bypasses the need for intermediate storage, which can save costs. However, this option doesn't provide a solution for the IBM Db2 database.
 
     </details>
 
-30. A company has implemented its ERP system on SAP S/4HANAon AWS. The system is based on Enqueue Standalone Architecture (ENSA2) and is highly available. As part of an availability test, the company failed over its system to secondary nodes in the second Availability Zone. When the system failed over, the initial licenses were no longer valid. What could be the reason for this behavior?
-    - [ ] A. The company needs to apply SAP licenses after each failover.
-    - [ ] B. The cluster configuration is not correct.
-    - [ ] C. The company needs two separate sets of licenses for ASCS instances in each Availability Zone.
-    - [ ] D. The company stopped and restarted the secondary node as part of the last maintenance.
+24. A company wants to deploy and maintain static websites on AWS. Each website's source code is hosted in one of several version control systems, including AWS CodeCommit, Bitbucket, and GitHub. The company wants to implement phased releases by using development, staging, user acceptance testing, and production environments in the AWS Cloud. Deployments to each environment must be started by code merges on the relevant Git branch. The company wants to use HTTPS for all data exchange. The company needs a solution that does not require servers to run continuously. Which solution will meet these requirements with the LEAST operational overhead?
+    - [ ] A. Host each website by using AWS Amplify with a serverless backend. Conned the repository branches that correspond to each of the desired environments. Start deployments by merging code changes to a desired branch.
+    - [ ] B. Host each website in AWS Elastic Beanstalk with multiple environments. Use the EB CLI to link each repository branch. Integrate AWS CodePipeline to automate deployments from version control code merges.
+    - [ ] C. Host each website in different Amazon S3 buckets for each environment. Configure AWS CodePipeline to pull source code from version control. Add an AWS CodeBuild stage to copy source code to Amazon S3.
+    - [ ] D. Host each website on its own Amazon EC2 instance. Write a custom deployment script to bundle each website's static assets. Copy the assets to Amazon EC2. Set up a workflow to run the script when code is merged.
+
+    <details>
+       <summary>Answer</summary>
+
+       A.
+       - A. AWS Amplify with a serverless backend would allow for static site hosting with HTTPS support. Amplify can automatically deploy changes based on branches in connected repositories, which aligns with the requirement for deployments initiated by code merges. It also provides a serverless approach, meaning no continuously running servers.
+       - B. AWS Elastic Beanstalk (EB) is designed for scalable web applications and services but can also host static sites. Using EB with the CLI to link repositories and integrating AWS CodePipeline can meet the deployment requirements. However, EB does have an underlying infrastructure that would be running continuously. Additionally, the setup and maintenance of EB, the EB CLI, and CodePipeline might introduce a higher operational overhead compared to other solutions.
+       - C. Hosting in S3 buckets would mean static hosting with HTTPS (when integrated with Amazon CloudFront). Using CodePipeline and CodeBuild to automate deployments from version control and copy to S3 aligns with the requirements. However, this involves multiple components (S3, CodePipeline, CodeBuild), which can add operational overhead, albeit less than option B.
+       - D. Using Amazon EC2 would mean continuously running servers, which violates one of the requirements. Also, manually writing deployment scripts and managing EC2 instances introduces significant operational overhead.
+
+    </details>
+
+25. A company is migrating its on-premises database to Amazon RDS for MySQL. The company has read-heavy workloads, and wants to make sure it re-factors its code to achieve optimum read performance for its queries. How can this objective be met?
+    - [ ] A. Add database retries to effectively use RDS with vertical scaling.
+    - [ ] B. Use RDS with multi-AZ deployment.
+    - [ ] C. Add a connection string to use an RDS read replica for read queries.
+    - [ ] D. Add a connection string to use a read replica on an EC2 instance.
+    <details>
+       <summary>Answer</summary>
+
+       C.
+
+    </details>
+
+26. A developer is creating an application that will be deployed on IoT devices. The application will send data to a RESTful API that is deployed as an AWS Lambda function. The application will assign each API request a unique identifier. The volume of API requests from the application can randomly increase at any given time of day. During periods of request throttling, the application might need to retry requests. The API must be able to handle duplicate requests without inconsistencies or data loss. Which solution will meet these requirements?
+    - [ ] A. Create an Amazon RDS for MySQL DB instance. Store the unique identifier for each request in a database table. Modify the Lambda function to check the table for the identifier before processing the request.
+    - [ ] B. Create an Amazon DynamoDB table. Store the unique identifier for each request in the table. Modify the Lambda function to check the table for the identifier before processing the request.
+    - [ ] C. Create an Amazon DynamoDB table. Store the unique identifier for each request in the table. Modify the Lambda function to return a client error response when the function receives a duplicate request.
+    - [ ] D. Create an Amazon ElastiCache for Memcached instance. Store the unique identifier for each request in the cache. Modify the Lambda function to check the cache for the identifier before processing the request.
 
     <details>
        <summary>Answer</summary>
 
        B.
-       This option is incorrect because SAP licenses are typically bound to a system ID (SID), and are not bound to a specific machine or instance. In a High Availability setup, the SAP system, including the ASCS instances, has the same SID on both the primary and secondary nodes. Therefore, the same license should work for both nodes. SAP does not require separate licenses for each ASCS instance in each Availability Zone.
-       The licensing of SAP systems is based on the SAPS (SAP Application Performance Standard) capacity of the system and the number of users that will be accessing the system, not the number of instances or servers that the system is running on. Therefore, having separate ASCS instances in different Availability Zones for High Availability purposes should not require additional SAP licenses.
 
     </details>
 
-31. A global company is planning to migrate its SAP S/4HANA workloads and SAP BW/4HANA workloads to AWS. The company’s database will not grow more than 3 TB for the next 3 years. The company's production SAP HANA system has been designed for high availability (HA) and disaster recovery (DR) with the following configurations: • HA: SAP HANA system replication configured with SYNC mode and LOGREPLAY operation mode across two Availability Zones with the same size SAP HANA node • DR: SAP HANA system replication configured with ASYNC mode and LOGREPLAY operation mode across AWS Regions with the same size SAP HANA node. All the SAP HANA nodes in the current configuration are the same size. For HA, the company wants an RPO of 0 and an RTO of 5 minutes. For DR, the company wants an RPO of 0 and an RTO of 3 hours. How should the company design this solution to meet the RPO and RTO requirements MOST cost-effectively?
-    - [ ] A. Maintain HA with SAP HANA system replication configured with SYNC mode and table preload turned on across two Availability Zones. In each Availability Zone, use the same size SAP HANA node. Decrease the size of the DR node to at least 64 GiB of memory or the row store size plus 20 GiB, whichever is higher, with ASYNC mode and table preload turned on. Increase the size of the DR node during a DR event.
-    - [ ] B. Maintain HA with SAP HANA system replication configured with SYNC mode and table preload turned on across two Availability Zones. In each Availability Zone, use the same size SAP HANA node. Decrease the size of the DR node to at least 64 GiB of memory or the row store size plus 20 GiB, whichever is higher, with ASYNC mode and table preload turned off. Increase the size of the DR node during a DR event.
-    - [ ] C. Maintain HA with SAP HANA system replication across two Availability Zones. Decrease the size of the HA secondary node to at least 64 GiB of memory or the row store size plus 20 GiB, whichever is higher, with SYNC mode and table preload turned on. Increase the size of the HA secondary node during an HA event. Decrease the size of the DR node to at least 64 GiB of memory or the row store size plus 20 GiB, whichever is higher, with table preload turned on. Increase the size of the DR node during a DR event.
-    - [ ] D. Maintain HA with SAP HANA system replication across two Availability Zones. Decrease the size of the HA secondary node to at least 64 GiB of memory or the row store size plus 20 GiB, whichever is higher, with SYNC mode and table preload turned on. Increase the size of the HA secondary node during an HA event. Decrease the size of the DR node to at least 64 GiB of memory or the row store size plus 20 GiB, whichever is higher, with table preload turned off. Increase the size of the DR node during a DR event.
+27. A developer wants to expand an application to run in multiple AWS Regions. The developer wants to copy Amazon Machine Images (AMIs) with the latest changes and create a new application slack in the destination Region. According to company requirements, all AMIs must be encrypted in all Regions. However, not all the AMIs that the company uses are encrypted. How can the developer expand the application to run in the destination Region while meeting the encryption requirement?
+    - [ ] A. Create a new AMIs, and specify encryption parameters. Copy the encrypted AMIs to the destination Region. Delete the unencrypted AMIs.
+    - [ ] B. Use AWS Key Management Service (AWS KMS) to enable encryption on the unencrypted AMIs. Copy the encrypted AMIs to the destination Region.
+    - [ ] C. Use AWS Certificate Manager (ACM) to enable encryption on the unencrypted AMIs. Copy the encrypted AMIs to the destination Region.
+    - [ ] D. Copy the unencrypted AMIs to the destination Region. Enable encryption by default in the destination Region.
+
+       <summary>Answer</summary>
+
+       B.
+      - A. Creating new AMIs with encryption enabled and then copying them to the destination region is feasible. However, you cannot directly specify encryption parameters on the source AMIs if they are already created and unencrypted. This option implies creating new encrypted AMIs from the instances and then copying them to the destination region, which is plausible but may not be the most straightforward solution.
+      - B. AWS Key Management Service (AWS KMS) is used for managing encryption keys, but you cannot directly "enable encryption" on an existing unencrypted AMI using KMS. However, you can copy the AMI and specify a KMS key for encryption during the copy process.
+      - C. AWS Certificate Manager (ACM) is for managing SSL/TLS certificates, not for encrypting AMIs.
+      - D. If "encryption by default" is enabled in the destination region, any new EBS volumes or snapshot created in that region would be encrypted. However, simply copying an unencrypted AMI to the destination region won't encrypt the AMI automatically, even if encryption by default is enabled.
+
+    </details>
+
+28. A company hosts a client-side web application for one of its subsidiaries on Amazon S3. The web application can be accessed through Amazon CloudFront from <https://www.example.com>. After a successful rollout, the company wants to host three more client-side web applications for its remaining subsidiaries on three separate S3 buckets. To achieve this goal, a developer moves all the common JavaScript files and web fonts to a central S3 bucket that serves the web applications. However, during testing, the developer notices that the browser blocks the JavaScript files and web fonts. What should the developer do to prevent the browser from blocking the JavaScript files and web fonts?
+    - [ ] A. Create four access points that allow access to the central S3 bucket. Assign an access point to each web application bucket.
+    - [ ] B. Create a bucket policy that allows access to the central S3 bucket. Attach the bucket policy to the central S3 bucket.
+    - [ ] C. Create a cross-origin resource sharing (CORS) configuration that allows access to the central S3 bucket. Add the CORS configuration to the central S3 bucket.
+    - [ ] D. Create a Content-MD5 header that provides a message integrity check for the central S3 bucket. Insert the Content-MD5 header for each web application request.
 
     <details>
        <summary>Answer</summary>
 
-       B.
-       High Availability (HA): The goal is to ensure that there is no data loss (RPO = 0) and that the system can be back online within 5 minutes (RTO = 5 minutes). For this, system replication with SYNC mode is appropriate as it ensures that the primary and secondary systems are in sync. The 'table preload' feature ensures that tables are preloaded into memory on the secondary site. This reduces the startup time, ensuring a faster RTO.
-       Disaster Recovery (DR): The goal here is to ensure no data loss (RPO = 0) and a recovery time of up to 3 hours (RTO = 3 hours). Using ASYNC mode for system replication is adequate for DR scenarios as it ensures data is replicated but allows for some lag.
+       C.
 
     </details>
 
-32. A company is planning to implement its production SAP HANA database with an XS Advanced runtime environment on AWS. The company must provision the necessary AWS resources and install the SAP HANA database within 1 day to meet an urgent business request. The company must implement a solution that minimizes operational effort. Which combination of steps should the company take to meet these requirements? (Choose two.)
-    - [ ] A. Install XS Advanced runtime by using the SAP HANA database lifecycle manager (HDBLCM).
-    - [ ] B. Provision AWS resources by using the AWS Management Console. Install SAP HANA by using the SAP HANA database lifecycle manager (HDBLCM).
-    - [ ] C. Use AWS Launch Wizard for SAP.
-    - [ ] D. Develop and use AWS CloudFormation templates to provision the AWS resources.
-    - [ ] E. Evaluate and identify the certified Amazon EC2 instances and Amazon Elastic Block Store (Amazon EBS) volume types for SAP HANA.
+29. An application is processing clickstream data using Amazon Kinesis. The clickstream data feed into Kinesis experiences periodic spikes. The PutRecords API call occasionally fails and the logs show that the failed call returns the response shown below, Which techniques will help mitigate this exception? (Choose two.)
+
+    ```json
+    {
+      "FailedRecordCount": "1",
+      "Records": [
+         {
+            "SequenceNumber": "2123137863287632187",
+            "ShardID": "ShardId-463783687423"
+         },
+         {
+            "ErrorCode": "ProvisionedThroughputExceededException",
+            "ErrorMessage": "Rate Exceeded for shard ShardId-463783687423 in stream exampleStreamName under account 1234567."
+         }
+      ]
+    }
+    ```
+
+    - [ ] A. Implement retries with exponential backoff.
+    - [ ] B. Use a PutRecord API instead of PutRecords.
+    - [ ] C. Reduce the frequency and/or size of the requests.
+    - [ ] D. Use Amazon SNS instead of Kinesis.
+    - [ ] E. Reduce the number of KCL consumers.
 
     <details>
        <summary>Answer</summary>
 
        AC.
-       A. Install XS Advanced runtime by using the SAP HANA database lifecycle manager (HDBLCM).
-          - The SAP HANA database lifecycle manager (HDBLCM) is a tool provided by SAP to manage the lifecycle of SAP HANA. It can be used to install or update the SAP HANA database and associated components, including XS Advanced runtime. By using HDBLCM, the company will ensure that the installation of XS Advanced is in line with SAP's best practices and recommendations.
-       C. Use AWS Launch Wizard for SAP.
-          - AWS Launch Wizard for SAP provides a guided way of sizing, configuring, and deploying SAP HANA applications on AWS, making it simpler and faster. The AWS Launch Wizard not only helps in provisioning the required AWS resources (like EC2, EBS, etc.) but also automates the installation of SAP HANA. By using the Launch Wizard, the company can accelerate the provisioning and installation process while ensuring that the deployment adheres to AWS's best practices for running SAP HANA on the platform.
+       - A. This is a common best practice for handling throttling errors. By implementing retries with exponential backoff, the application can make repeated attempts to send the data, with increasing wait times between each attempt, until the request succeeds or a maximum number of retries is reached.
+       - B. Switching to the PutRecord API from the PutRecords API wouldn't necessarily resolve the throughput exception, especially if the volume of data being sent is the root cause of the problem.
+       - C. By reducing the frequency or size of the requests, you're sending data at a rate that better aligns with the Kinesis stream's provisioned throughput, which can help avoid the "Rate Exceeded" errors.
+       - D. SNS serves a different use case compared to Kinesis. SNS is for pub/sub messaging while Kinesis is designed for real-time streaming data. Switching to SNS would not directly address the issue of the throughput exception and may not meet the application's requirements.
+       - E. Reducing the number of KCL (Kinesis Client Library) consumers wouldn't help with the "Rate Exceeded" errors. The error in question is related to putting (or writing) data into the stream, not reading from it. The number of KCL consumers affects the read capacity, not the write capacity.
 
     </details>
 
-33. A company wants to migrate its SAP environments to AWS. The SAP environments include SAP ERP Central Component (SAP ECC). SAP Business Warehouse (SAP BW), and SAP Process Integration (SAP PI) systems. As part of the migration, the company wants to do a system transformation to SAP S/4HANA. The company wants to implement SAP Fiori by using an SAP Gateway hub deployment and an internet-facing SAP Web Dispatcher for this SAP S/4HANA system only. Employees around the world will access the SAP Fiori launchpad. The company needs to allow access to only the URLs that are required for running SAP Fiori. How should an SAP security engineer design the security architecture to meet these requirements?
-    - [ ] A. Deploy the SAP Web Dispatcher in a public subnet. Allow access to only the IP addresses that employees use to access the SAP Fiori server.
-    - [ ] B. Deploy the SAP Web Dispatcher in a private subnet. Allow access to only the ports that are required for running SAP Fiori.
-    - [ ] C. Deploy the SAP Web Dispatcher in a public subnet. Allow access to only the paths that are required for running SAP Fiori.
-    - [ ] D. Deploy the SAP Web Dispatcher in a private subnet. Allow access to only the SAP S/4HANA system that serves as the SAP Fiori backend system for the SAP Gateway hub.
-
-    <details>
-       <summary>Answer</summary>
-
-       C.
-
-    </details>
-
-34. A company recently implemented its SAP S/4HANA system on AWS. An SAP engineer must set up a Pacemaker cluster on Amazon EC2 instances to provide high availability. Which solution will meet this requirement?
-    - [ ] A. Set up a fencing mechanism for the cluster by using a block device.
-    - [ ] B. Set up an overlay IP address as a public IP address.
-    - [ ] C. Create a route to the overlay IP address on the on-premises network.
-    - [ ] D. Create an EC2 instance profile that has an IAM role that allows access modification of the route table.
-
-    <details>
-       <summary>Answer</summary>
-
-       D.
-       In order to provide high availability with Pacemaker cluster on Amazon EC2, you need a method for the cluster to manage node-level failures. This is known as "fencing" in Pacemaker. However, traditional fencing mechanisms like using block devices or power switches are not applicable in a cloud environment like AWS. Instead, you can leverage EC2 instance profiles with an IAM role that allows the modification of route tables. This IAM role can be used to reroute network traffic, essentially performing the "fencing" action in the
-
-    </details>
-
-35. A company runs core business processes on SAP. The company plans to migrate its SAP workloads to AWS. Which combination of prerequisite steps must the company take to receive integrated support for SAP on AWS? (Choose three.)
-    - [ ] A. Purchase an AWS Developer Support plan or an AWS Enterprise Support plan.
-    - [ ] B. Purchase an AWS Business Support plan or an AWS Enterprise Support plan.
-    - [ ] C. Enable Amazon CloudWatch detailed monitoring.
-    - [ ] D. Enable Amazon EC2 termination protection.
-    - [ ] E. Configure and run the AWS Data Provider for SAP agent.
-    - [ ] F. Use Reserved Instances for all Amazon EC2 instances that run SAP.
-
-    <details>
-       <summary>Answer</summary>
-
-       BCE.
-
-    </details>
-
-36. A company is planning to migrate its SAP S/4HANAand SAP BW/4HANA workloads to AWS. The company is currently using a third-party solution to back up its SAP HANA database and application. The company wants to retire the third-party backup solution after the migration to AWS. The company needs a backup solution on AWS to manage its SAP HANA database and application backups. The solution must provide secure storage of backups and must optimize cost. Which solution will meet these requirements?
-    - [ ] A. Use SAP HANA Studio, SAP HANA HDBSQL, and SAP HANA Cockpit to perform backups to local Amazon Elastic Block Store (Amazon EBS) volumes. Enable EBS volume encryption. Use AWS Backup to perform application backups with AMIs or snapshots to Amazon S3. Enable S3 encryption.
-    - [ ] B. Use SAP HANA Cockpit to implement a backup policy and perform SAP HANA database backups to Amazon S3 with AWS Backint Agent for SAP HANA. Enable S3 encryption. Use AWS Backup with backup plans to perform application backups with AMIs or snapshots. Enable S3 encryption.
-    - [ ] C. Use AWS Backup with backup plans to perform SAP HANA database backups to Amazon S3 with AWS Backint Agent for SAP HANA. Enable S3 encryption. Use AWS Backup with backup plans to perform application backups with AMIs or snapshots. Enable S3 encryption.
-    - [ ] D. Use SAP HANA Studio, SAP HANA HDBSQL, and SAP HANA Cockpit to perform backups to local Amazon Elastic Block Store (Amazon EBS) volumes. Copy the backups to Amazon S3. Use AWS Backup to schedule application backups with AMIs or snapshots to Amazon S3.
+30. A company has an application that uses Amazon Cognito user pools as an identity provider. The company must secure access to user records. The company has set up multi-factor authentication (MFA). The company also wants to send a login activity notification by email every time a user logs in. What is the MOST operationally efficient solution that meets this requirement?
+    - [ ] A. Create an AWS Lambda function that uses Amazon Simple Email Service (Amazon SES) to send the email notification. Add an Amazon API Gateway API to invoke the function. Call the API from the client side when login confirmation is received.
+    - [ ] B. Create an AWS Lambda function that uses Amazon Simple Email Service (Amazon SES) to send the email notification. Add an Amazon Cognito post authentication Lambda trigger for the function.
+    - [ ] C. Create an AWS Lambda function that uses Amazon Simple Email Service (Amazon SES) to send the email notification. Create an Amazon CloudWatch Logs log subscription filter to invoke the function based on the login status.
+    - [ ] D. Configure Amazon Cognito to stream all logs to Amazon Kinesis Data Firehose. Create an AWS Lambda function to process the streamed logs and to send the email notification based on the login status of each user.
 
     <details>
        <summary>Answer</summary>
 
        B.
-       This solution is the best fit because it uses SAP HANA Cockpit and AWS Backint Agent for SAP HANA to directly backup HANA databases to Amazon S3, and AWS Backup to handle the application backups. Both the database and application backups are stored in S3 with encryption enabled for security.
 
     </details>
 
-37. A company is running its SAP S/4HANA system on AWS. The company needs to retain database backups for the previous 30 days. The company is taking full online backups by using SAP HANA Studio and is storing the backup files on General Purpose SSD (gp3) Amazon Elastic Block Store (Amazon EBS) volumes. The company needs to reduce the cost of this storage. What should the company do to achieve the LOWEST cost for the backup storage?
-    - [ ] A. Continue to use SAP HANA Studio to back up the SAP HANA database to gp3 EBS volumes. After each backup is completed, use Linux shell scripts to move the backup to Amazon S3. Set up an S3 Lifecycle configuration to delete the backups that are older than 30 days.
-    - [ ] B. Continue to use SAP HANA Studio to back up the SAP HANA database. Use Throughput Optimized HDD (st1) EBS volumes to store each backup. After each backup is completed, use Linux shell scripts to move the backup to Amazon S3. Set up an S3 Lifecycle configuration to delete the backups that are older than 30 days.
-    - [ ] C. Use AWS Backup to take full online backups of the SAP HANA database.
-    - [ ] D. Continue to use SAP HANA Studio to back up the SAP HANA database. Use AWS Backint Agent for SAP HANA to store each backup. Set up an Amazon S3 Lifecycle configuration to delete the backups that are older than 30 days.
+31. A developer has an application that stores data in an Amazon S3 bucket. The application uses an HTTP API to store and retrieve objects. When the PutObject API operation adds objects to the S3 bucket the developer must encrypt these objects at rest by using server-side encryption with Amazon S3 managed keys (SSE-S3). Which solution will meet this requirement?
+    - [ ] A. Create an AWS Key Management Service (AWS KMS) key. Assign the KMS key to the S3 bucket.
+    - [ ] B. Set the x-amz-server-side-encryption header when invoking the PutObject API operation.
+    - [ ] C. Provide the encryption key in the HTTP header of every request.
+    - [ ] D. Apply TLS to encrypt the traffic to the S3 bucket.
+
+    <details>
+       <summary>Answer</summary>
+
+       B.
+
+    </details>
+
+32. A developer needs to perform geographic load testing of an API. The developer must deploy resources to multiple AWS Regions to support the load testing of the API. How can the developer meet these requirements without additional application code?
+    - [ ] A. Create and deploy an AWS Lambda function in each desired Region. Configure the Lambda function to create a stack from an AWS CloudFormation template in that Region when the function is invoked.
+    - [ ] B. Create an AWS CloudFormation template that defines the load test resources. Use the AWS CLI create-stack-set command to create a stack set in the desired Regions.
+    - [ ] C. Create an AWS Systems Manager document that defines the resources. Use the document to create the resources in the desired Regions.
+    - [ ] D. Create an AWS CloudFormation template that defines the load test resources. Use the AWS CLI deploy command to create a stack from the template in each Region.
+
+    <details>
+       <summary>Answer</summary>
+
+       B.
+
+    </details>
+
+33. A developer is creating an application that includes an Amazon API Gateway REST API in the us-east-2 Region. The developer wants to use Amazon CloudFront and a custom domain name for the API. The developer has acquired an SSL/TLS certificate for the domain from a third-party provider. How should the developer configure the custom domain for the application?
+    - [ ] A. Import the SSL/TLS certificate into AWS Certificate Manager (ACM) in the same Region as the API. Create a DNS A record for the custom domain.
+    - [ ] B. Import the SSL/TLS certificate into CloudFront. Create a DNS CNAME record for the custom domain.
+    - [ ] C. Import the SSL/TLS certificate into AWS Certificate Manager (ACM) in the same Region as the API. Create a DNS CNAME record for the custom domain.
+    - [ ] D. Import the SSL/TLS certificate into AWS Certificate Manager (ACM) in the us-east-1 Region. Create a DNS CNAME record for the custom domain.
 
     <details>
        <summary>Answer</summary>
 
        D.
+       When using a custom domain with Amazon API Gateway and CloudFront, the SSL/TLS certificate needs to be in AWS Certificate Manager (ACM). However, the important detail to remember is that even if your API Gateway is in a region other than us-east-1, when you are associating a custom domain name with an API Gateway, the certificate for the custom domain name should be imported into ACM in the us-east-1 region. This is because API Gateway uses CloudFront for custom domain names, and CloudFront distributions require certificates to be in the us-east-1 region.
 
     </details>
 
-38. A company is migrating a 20 TB SAP S/4HANA system to AWS. The company wants continuous monitoring of the SAP S/4HANA system and wants to receive notification when CPU utilization is greater than 90%. An SAP solutions architect must implement a solution that provides this notification with the least possible effort. Which solution meets these requirements?
-    - [ ] A. Create an AWS Lambda function that checks CPU utilization and sends the notification.
-    - [ ] B. Use AWS CloudTrail to check the CPU utilization metric. Set up an Amazon Simple Notification Service (Amazon SNS) topic to send the notification.
-    - [ ] C. Use Amazon CloudWatch to set a CPU utilization alarm. Set up an Amazon Simple Notification Service (Amazon SNS) topic to send the notification.
-    - [ ] D. Use the Amazon CloudWatch dashboard to monitor CPU utilization. Set up an Amazon Simple Notification Service (Amazon SNS) topic to send the notification.
+34. A developer is creating a template that uses AWS CloudFormation to deploy an application. The application is serverless and uses Amazon API Gateway. Amazon DynamoDB, and AWS Lambda. Which AWS service or tool should the developer use to define serverless resources in YAML?
+    - [ ] A. CloudFormation serverless intrinsic functions
+    - [ ] B. AWS Elastic Beanstalk
+    - [ ] C. AWS Serverless Application Model (AWS SAM)
+    - [ ] D. AWS Cloud Development Kit (AWS CDK)
+
+    <details>
+       <summary>Answer</summary>
+
+       C.
+       - A. CloudFormation serverless intrinsic functions: CloudFormation does support creating serverless resources but doesn't have the shorthand syntax that AWS SAM provides for serverless applications.
+       - B. AWS Elastic Beanstalk: This service is primarily used for deploying web applications and services. It isn't focused on serverless applications or defining resources in YAML specifically for serverless scenarios.
+       - C. AWS Serverless Application Model (AWS SAM): This is the correct choice. AWS SAM provides a simplified CloudFormation syntax to express serverless resources, making it easier to define serverless applications.
+       - D. AWS Cloud Development Kit (AWS CDK): The AWS CDK is a software development framework to define cloud infrastructure in code and provision it through AWS CloudFormation. While you can define serverless resources using the AWS CDK, it uses programming languages like TypeScript, Python, etc., not YAML or JSON.
+
+    </details>
+
+35. A developer wants to insert a record into an Amazon DynamoDB table as soon as a new file is added to an Amazon S3 bucket. Which set of steps would be necessary to achieve this?
+    - [ ] A. Create an event with Amazon EventBridge that will monitor the S3 bucket and then insert the records into DynamoDB.
+    - [ ] B. Configure an S3 event to invoke an AWS Lambda function that inserts records into DynamoDB.
+    - [ ] C. Create an AWS Lambda function that will poll the S3 bucket and then insert the records into DynamoDB.
+    - [ ] D. Create a cron job that will run at a scheduled time and insert the records into DynamoDB.
+
+    <details>
+       <summary>Answer</summary>
+
+       B.
+
+    </details>
+
+36. A development team maintains a web application by using a single AWS CloudFormation template. The template defines web servers and an Amazon RDS database. The team uses the Cloud Formation template to deploy the Cloud Formation stack to different environments. During a recent application deployment, a developer caused the primary development database to be dropped and recreated. The result of this incident was a loss of data. The team needs to avoid accidental database deletion in the future. Which solutions will meet these requirements? (Choose two.)
+    - [ ] A. Add a CloudFormation Deletion Policy attribute with the Retain value to the database resource.
+    - [ ] B. Update the CloudFormation stack policy to prevent updates to the database.
+    - [ ] C. Modify the database to use a Multi-AZ deployment.
+    - [ ] D. Create a CloudFormation stack set for the web application and database deployments.
+    - [ ] E. Add a Cloud Formation DeletionPolicy attribute with the Retain value to the stack.
+
+    <details>
+       <summary>Answer</summary>
+
+       AB.
+      - A. This will ensure that even if the stack is deleted or the database resource is removed from the template, the database will not be deleted.
+      - B. By denying update actions on the database resource, you can prevent unintentional changes that might be harmful.
+
+    </details>
+
+37. A company has an Amazon S3 bucket that contains sensitive data. The data must be encrypted in transit and at rest. The company encrypts the data in the S3 bucket by using an AWS Key Management Service (AWS KMS) key. A developer needs to grant several other AWS accounts the permission to use the S3 GetObject operation to retrieve the data from the S3 bucket. How can the developer enforce that all requests to retrieve the data provide encryption in transit?
+    - [ ] A. Define a resource-based policy on the S3 bucket to deny access when a request meets the condition "aws:SecureTransport": "false".
+    - [ ] B. Define a resource-based policy on the S3 bucket to allow access when a request meets the condition "aws:SecureTransport": "false".
+    - [ ] C. Define a role-based policy on the other accounts' roles to deny access when a request meets the condition of "aws:SecureTransport": "false".
+    - [ ] D. Define a resource-based policy on the KMS key to deny access when a request meets the condition of "aws:SecureTransport": "false".
+
+    <details>
+       <summary>Answer</summary>
+
+       A.
+       - A. This is the correct approach. By setting a condition that denies access when "aws:SecureTransport" is "false", you ensure that only encrypted (in transit) requests can access the S3 bucket.
+       - B. This would explicitly allow non-secure (unencrypted in transit) requests, which is opposite of what we want.
+       - C. While it's possible to define such a policy on the other accounts' roles, it's simpler and more effective to manage the encryption enforcement directly on the S3 bucket, ensuring that no matter who or where the request comes from, the encryption in transit is enforced.
+       - D. The KMS key's policy will determine who can use the key for encrypting/decrypting. However, it's not where you'd typically enforce the SSL/TLS requirement for accessing the data in S3. That should be enforced at the S3 bucket level.
+
+    </details>
+
+38. An application that is hosted on an Amazon EC2 instance needs access to files that are stored in an Amazon S3 bucket. The application lists the objects that are stored in the S3 bucket and displays a table to the user. During testing, a developer discovers that the application does not show any objects in the list. What is the MOST secure way to resolve this issue?
+    - [ ] A. Update the IAM instance profile that is attached to the EC2 instance to include the S3:' permission for the S3 bucket.
+    - [ ] B. Update the IAM instance profile that is attached to the EC2 instance to include the S3:ListBucket permission for the S3 bucket.
+    - [ ] C. Update the developer's user permissions to include the S3:ListBucket permission for the S3 bucket.
+    - [ ] D. Update the S3 bucket policy by including the S3:ListBucket permission and by setting the Principal element to specify the account number of the EC2 instance.
+    <details>
+       <summary>Answer</summary>
+
+       B.
+
+    </details>
+
+39. A company is planning to securely manage one-time fixed license keys in AWS. The company's development team needs to access the license keys in automaton scripts that run in Amazon EC2 instances and in AWS CloudFormation stacks. Which solution will meet these requirements MOST cost-effectively?
+    - [ ] A. Amazon S3 with encrypted files prefixed with “config”
+    - [ ] B. AWS Secrets Manager secrets with a tag that is named SecretString
+    - [ ] C. AWS Systems Manager Parameter Store SecureString parameters
+    - [ ] D. CloudFormation NoEcho parameters
+
     <details>
        <summary>Answer</summary>
 
@@ -519,31 +562,16 @@
 
     </details>
 
-39. A company has run SAP HANA on AWS for a few years on an Amazon EC2 X1 instance with dedicated tenancy. Because of business growth, the company plans to migrate to an EC2 High Memory instance by using a resize operation. The SAP HANA system is set up for high availability with SAP HANA system replication and clustering software. Which combination of steps should the company take before the migration? (Choose three.)
-    - [ ] A. Ensure that the source system is running on a supported operating system version.
-    - [ ] B. Update all references to the IP address of the source system, including the /etc/hosts file for the operating system and DNS entries, to reflect the new IP address.
-    - [ ] C. Adjust the storage size of SAP HANA data, log, shared, and backup volumes.
-    - [ ] D. Resize the instance through the AWS Management Console or the AWS CLI.
-    - [ ] E. Ensure that there is a backup of the source system.
-    - [ ] F. Update the DNS records. Check the connectivity between the SAP application servers and the new SAP HANA instance.
-
+40. A company has deployed infrastructure on AWS. A development team wants to create an AWS Lambda function that will retrieve data from an Amazon Aurora database. The Amazon Aurora database is in a private subnet in company's VPC. The VPC is named VPC1. The data is relational in nature. The Lambda function needs to access the data securely. Which solution will meet these requirements?
+    - [ ] A. Create the Lambda function. Configure VPC1 access for the function. Attach a security group named SG1 to both the Lambda function and the database. Configure the security group inbound and outbound rules to allow TCP traffic on Port 3306.
+    - [ ] B. Create and launch a Lambda function in a new public subnet that is in a new VPC named VPC2. Create a peering connection between VPC1 and VPC2.
+    - [ ] C. Create the Lambda function. Configure VPC1 access for the function. Assign a security group named SG1 to the Lambda function. Assign a second security group named SG2 to the database. Add an inbound rule to SG1 to allow TCP traffic from Port 3306.
+    - [ ] D. Export the data from the Aurora database to Amazon S3. Create and launch a Lambda function in VPC1. Configure the Lambda function query the data from Amazon S3.
     <details>
        <summary>Answer</summary>
 
-       ADE.
-
-    </details>
-
-40. A company has migrated its SAP workloads to AWS. A third-party team performs a technical evaluation and finds that the SAP workloads are not fully supported by SAP and AWS. What should the company do to receive full support from SAP and AWS?
-    - [ ] A. Purchase an AWS Developer Support plan.
-    - [ ] B. Turn on Amazon CloudWatch basic monitoring.
-    - [ ] C. Ensure that the /usr/sap file system is running on local instance storage.
-    - [ ] D. Ensure that the AWS Data Provider for SAP agent is configured and running.
-    <details>
-       <summary>Answer</summary>
-
-       D.
-       To receive full support from both SAP and AWS for SAP workloads running on AWS, it is necessary to have the AWS Data Provider for SAP agent configured and running. This agent collects performance data from the AWS infrastructure and makes it available to SAP applications for SAP's support and services.
+       A.
+       This is a good approach. By attaching the Lambda function to the VPC, it can access resources inside the VPC. Also, by using the same security group for both Lambda and Aurora, you can set rules that allow them to communicate with each other.While placing the Lambda function in VPC1 is correct, modifying the Lambda function's security group (SG1) inbound rules to allow traffic from Port 3306 is not appropriate. Instead, the Aurora's security group (SG2) should allow incoming traffic on port 3306 from the Lambda function.
 
     </details>
 
