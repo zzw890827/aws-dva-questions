@@ -575,11 +575,91 @@
 
     </details>
 
-41. A company wants to deploy SAP BW/4HANA on AWS. An SAP technical architect selects a u-6tb1.56xlarge Amazon EC2 instance to host the SAP HANA database. The SAP technical architect must design a highly available architecture that achieves the lowest possible RTO and a near-zero RPO. The solution must not affect the performance of the primary database. Which solution will meet these requirements?
-    - [ ] A. Deploy two u-6tb1.56xlarge EC2 instances for SAP HANA in separate AWS Regions. Set up synchronous SAP HANA system replication between the instances.
-    - [ ] B. Deploy two u-6tb1.56xlarge EC2 instances for SAP HANA in separate AWS Regions. Set up asynchronous SAP HANA system replication between the instances.
-    - [ ] C. Deploy two u-6tb1.56xlarge EC2 instances for SAP HANA in separate Availability Zones in the same AWS Region. Set up synchronous SAP HANA system replication between the instances.
-    - [ ] D. Deploy two u-6tb1.56xlarge EC2 instances for SAP HANA in separate Availability Zones in the same AWS Region. Set up asynchronous SAP HANA system replication between the instances.
+41. A developer is building a web application that uses Amazon API Gateway to expose an AWS Lambda function to process requests from clients. During testing, the developer notices that the API Gateway times out even though the Lambda function finishes under the set time limit. Which of the following API Gateway metrics in Amazon CloudWatch can help the developer troubleshoot the issue? (Choose two.)
+    - [ ] A. CacheHitCount
+    - [ ] B. IntegrationLatency
+    - [ ] C. CacheMissCount
+    - [ ] D. Latency
+    - [ ] E. Count
+
+    <details>
+       <summary>Answer</summary>
+
+       BD.
+
+    </details>
+
+42. A Developer is designing an AWS Lambda function that create temporary files that are less than 10 MB during execution. The temporary files will be accessed and modified multiple times during execution. The Developer has no need to save or retrieve these files in the future. Where should the temporary file be stored?
+    - [ ] A. the /tmp directory
+    - [ ] B. Amazon EFS
+    - [ ] C. Amazon EBS
+    - [ ] D. Amazon S3
+
+    <details>
+       <summary>Answer</summary>
+
+       A.
+
+    </details>
+
+43. A developer is designing a serverless application with two AWS Lambda functions to process photos. One Lambda function stores objects in an Amazon S3 bucket and stores the associated metadata in an Amazon DynamoDB table. The other Lambda function fetches the objects from the S3 bucket by using the metadata from the DynamoDB table. Both Lambda functions use the same Python library to perform complex computations and are approaching the quota for the maximum size of zipped deployment packages. What should the developer do to reduce the size of the Lambda deployment packages with the LEAST operational overhead?
+    - [ ] A. Package each Python library in its own .zip file archive. Deploy each Lambda function with its own copy of the library.
+    - [ ] B. Create a Lambda layer with the required Python library. Use the Lambda layer in both Lambda functions.
+    - [ ] C. Combine the two Lambda functions into one Lambda function. Deploy the Lambda function as a single .zip file archive.
+    - [ ] D. Download the Python library to an S3 bucket. Program the Lambda functions to reference the object URLs.
+
+    <details>
+       <summary>Answer</summary>
+
+       B.
+       Lambda layers are used to store the code dependencies, custom runtimes, configuration files etc. We create a .zip file archive that contains supplementary code or data.
+
+    </details>
+
+44. A developer is writing an AWS Lambda function. The developer wants to log key events that occur while the Lambda function runs. The developer wants to include a unique identifier to associate the events with a specific function invocation. The developer adds the following code to the Lambda function: Which solution will meet this requirement?
+
+    ```javascript
+    function handler (event, context) {
+
+    } 
+    ```
+
+    - [ ] A. Obtain the request identifier from the AWS request ID field in the context object. Configure the application to write logs to standard output.
+    - [ ] B. Obtain the request identifier from the AWS request ID field in the event object. Configure the application to write logs to a file.
+    - [ ] C. Obtain the request identifier from the AWS request ID field in the event object. Configure the application to write logs to standard output.
+    - [ ] D. Obtain the request identifier from the AWS request ID field in the context object. Configure the application to write logs to a file.
+
+    <details>
+       <summary>Answer</summary>
+
+       A.
+       In AWS Lambda, each invocation has a unique identifier called the "request ID." This request ID is accessible through the context object and not the event object. So, let's break down the options:
+       - Option A: This aligns with how AWS Lambda works since Lambda captures logs written to standard output and sends them to Amazon CloudWatch Logs.
+       - Option B: suggests obtaining the request identifier from the AWS request ID field in the event object, but this is incorrect because the request ID is in the context object, not the event object.
+       - Option C: has the same flaw as Option B, suggesting obtaining the request ID from the event object.
+       - Option D: suggests obtaining the request ID from the context object but then writing logs to a file. Lambda functions log to CloudWatch by writing to standard output or standard error, not to files.
+
+    </details>
+
+45. An application uses an Amazon EC2 Auto Scaling group. A developer notices that EC2 instances are taking a long time to become available during scale-out events. The UserData script is taking a long time to run. The developer must implement a solution to decrease the time that elapses before an EC2 instance becomes available. The solution must make the most recent version of the application available at all times and must apply all available security updates. The solution also must minimize the number of images that are created. The images must be validated. Which combination of steps should the developer take to meet these requirements? (Choose two.)
+    - [ ] A. Use EC2 Image Builder to create an Amazon Machine Image (AMI). Install all the patches and agents that are needed to manage and run the application. Update the Auto Scaling group launch configuration to use the AMI.
+    - [ ] B. Use EC2 Image Builder to create an Amazon Machine Image (AMI). Install the latest version of the application and all the patches and agents that are needed to manage and run the application. Update the Auto Scaling group launch configuration to use the AMI.
+    - [ ] C. Set up AWS CodeDeploy to deploy the most recent version of the application at runtime.
+    - [ ] D. Set up AWS CodePipeline to deploy the most recent version of the application at runtime.
+    - [ ] E. Remove any commands that perform operating system patching from the UserData script.
+
+    <details>
+       <summary>Answer</summary>
+
+       BC.
+
+    </details>
+
+46. A developer is creating an AWS Lambda function that needs credentials to connect to an Amazon RDS for MySQL database. An Amazon S3 bucket currently stores the credentials. The developer needs to improve the existing solution by implementing credential rotation and secure storage. The developer also needs to provide integration with the Lambda function. Which solution should the developer use to store and retrieve the credentials with the LEAST management overhead?
+    - [ ] A. Store the credentials in AWS Systems Manager Parameter Store. Select the database that the parameter will access. Use the default AWS Key Management Service (AWS KMS) key to encrypt the parameter. Enable automatic rotation for the parameter. Use the parameter from Parameter Store on the Lambda function to connect to the database.
+    - [ ] B. Encrypt the credentials with the default AWS Key Management Service (AWS KMS) key. Store the credentials as environment variables for the Lambda function. Create a second Lambda function to generate new credentials and to rotate the credentials by updating the environment variables of the first Lambda function. Invoke the second Lambda function by using an Amazon EventBridge rule that runs on a schedule. Update the database to use the new credentials. On the first Lambda function, retrieve the credentials from the environment variables. Decrypt the credentials by using AWS KMS, Connect to the database.
+    - [ ] C. Store the credentials in AWS Secrets Manager. Set the secret type to Credentials for Amazon RDS database. Select the database that the secret will access. Use the default AWS Key Management Service (AWS KMS) key to encrypt the secret. Enable automatic rotation for the secret. Use the secret from Secrets Manager on the Lambda function to connect to the database.
+    - [ ] D. Encrypt the credentials by using AWS Key Management Service (AWS KMS). Store the credentials in an Amazon DynamoDB table. Create a second Lambda function to rotate the credentials. Invoke the second Lambda function by using an Amazon EventBridge rule that runs on a schedule. Update the DynamoDB table. Update the database to use the generated credentials. Retrieve the credentials from DynamoDB with the first Lambda function. Connect to the database.
 
     <details>
        <summary>Answer</summary>
@@ -588,24 +668,33 @@
 
     </details>
 
-42. A company has a 48 TB SAP application that runs on premises and uses an IBM Db2 database. The company needs to migrate the application to AWS. The company has strict uptime requirements for the application with maximum downtime of 24 hours each weekend. The company has established a 1 Gbps AWS Direct Connect connection but can spare bandwidth for migration only during non-business hours or weekends. How can the company meet these requirements to migrate the application to AWS?
-    - [ ] A. Use SAP Software Provisioning Manager to create an export of the data. Move this export to AWS during a weekend by using the Direct Connect connection. On AWS. import the data into the target SAP application. Perform the cutover.
-    - [ ] B. Set up database replication from on premises to AWS. On the day of downtime, ensure that the replication finishes. Perform cutover to AWS.
-    - [ ] C. Use an AWS Snowball Edge Storage Optimized device to send an initial backup to AWS. Capture incremental backups daily. When the initial backup is on AWS, perform database restore from the initial backup and keep applying incremental backups. On the day of cutover, perform the final incremental backup. Perform cutover to AWS.
-    - [ ] D. Use AWS Application Migration Service (CloudEndure Migration) to migrate the database to AWS. On the day of cutover, switch the application to run on AWS servers.
+47. A developer has written the following IAM policy to provide access to an Amazon S3 bucket: Which access does the policy allow regarding the s3:GetObject and s3:PutObject actions?
 
-    <details>
-       <summary>Answer</summary>
+    ```json
+    {
+      "Version":  "2012-10-17",
+      "Statements": [
+         {
+            "Effect": "Allow",
+            "Action": [
+               "s3:GetObject",
+               "s3:PutObject"
+            ],
+            "Resource": "arn:aws:s3:::DOC-EXAMPLE-BUCKET/*"
+         },
+         {
+            "Effect": "Deny",
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::DOC-EXAMPLE-BUCKET/*"
+         }
+      ]
+    }
+    ```
 
-       C.
-
-    </details>
-
-43. A company is running SAP S/4HANA on AWS. The company has deployed its current database infrastructure on a u-12tb1.112xlarge Amazon EC2 instance that uses default tenancy and SUSE Linux Enterprise Server for SAP 15 SP1. The company must scale its SAP HANA database to an instance with more RAM. An SAP solutions architect needs to migrate the database to a u-18tb1.metal High Memory instance. How can the SAP solutions architect meet this requirement?
-    - [ ] A. Use the AWS Management Console to stop the current instance. Change the instance type to u-18tb1.metal. Start the instance.
-    - [ ] B. Use the AWS CLI to stop the current instance. Change the instance type to u-18tb1.metal. Start the instance.
-    - [ ] C. Use the AWS CLI to stop the current instance. Create an AMI from the current instance. Use the new AMI to launch a new u-18tb1.metal instance with host tenancy.
-    - [ ] D. Use the AWS Management Console to stop the current instance. Create an AMI from the current instance. Use the new AMI to launch a new u-18tb1.metal instance with dedicated tenancy.
+    - [ ] A. Access on all buckets except the “DOC-EXAMPLE-BUCKET” bucket
+    - [ ] B. Access on all buckets that start with “DOC-EXAMPLE-BUCKET” except the “DOC-EXAMPLE-BUCKET/secrets” bucket
+    - [ ] C. Access on all objects in the “DOC-EXAMPLE-BUCKET” bucket along with access to all S3 actions for objects in the “DOC-EXAMPLE-BUCKET” bucket that start with “secrets”
+    - [ ] D. Access on all objects in the “DOC-EXAMPLE-BUCKET” bucket except on objects that start with “secrets”
 
     <details>
        <summary>Answer</summary>
@@ -614,106 +703,66 @@
 
     </details>
 
-44. financial services company is implementing SAP core banking on AWS. The company must not allow any system information to traverse the public internet. The company needs to implement secure monitoring of its SAP ERP Central Component (SAP ECC) system to check for performance issues and faults in its application. The solution must maximize security and must be supported by SAP and AWS. How should the company integrate AWS metrics with its SAP system to meet these requirements?
-    - [ ] A. Set up SAP Solution Manager to call Amazon CloudWatch and Amazon EC2 endpoints with REST-based calls to populate SAPOSCOL details. Use SAP transaction ST06N to monitor CPU and memory utilization on each EC2 instance.
-    - [ ] B. Install the AWS Data Provider for SAP on the Amazon EC2 instances that host SAP. Allow access to the Amazon CloudWatch and EC2 endpoints through a NAT gateway. Create an IAM policy that allows the ec2:DescribeInstances action, the cloudwatch:GetMetricStatistics action, and the ec2:DescribeVolumes action for all EC2 resources.
-    - [ ] C. Install the AWS Data Provider for SAP on the Amazon EC2 instances that host SAP. Create VPC endpoints for Amazon CloudWatch and Amazon EC2. Allow access through these endpoints. Create an IAM policy that allows the ec2:DescribeInstances action, the cloudwatch:GetMetricStatistics action, and the ec2:DescribeVolumes action for all EC2 resources.
-    - [ ] D. Install the AWS Data Provider for SAP on the Amazon EC2 instances that host SAP. Create VPC endpoints for Amazon CloudWatch and Amazon EC2. Allow access through these endpoints. Create an IAM policy that allows all actions for all EC2 resources.
+48. A developer is creating a mobile app that calls a backend service by using an Amazon API Gateway REST API. For integration testing during the development phase, the developer wants to simulate different backend responses without invoking the backend service. Which solution will meet these requirements with the LEAST operational overhead?
+    - [ ] A. Create an AWS Lambda function. Use API Gateway proxy integration to return constant HTTP responses.
+    - [ ] B. Create an Amazon EC2 instance that serves the backend REST API by using an AWS CloudFormation template.
+    - [ ] C. Customize the API Gateway stage to select a response type based on the request.
+    - [ ] D. Use a request mapping template to select the mock integration response.
 
     <details>
        <summary>Answer</summary>
 
-       C.
-       - A. This option involves making REST-based calls to Amazon CloudWatch and Amazon EC2. However, this could traverse the public internet unless specific security measures are put in place. It does not fully meet the requirement for maximum security.
-       - B. Allowing access to Amazon CloudWatch and EC2 endpoints through a NAT gateway does not satisfy the requirement to keep data off the public internet. NAT gateway still involves routing the traffic over the public internet, even though it is doing so from within the AWS network.
-       - C. This option is the most aligned with the requirements. By installing the AWS Data Provider for SAP and creating VPC endpoints for Amazon CloudWatch and Amazon EC2, you can ensure that the data does not traverse the public internet. VPC endpoints allow resources in your VPC to communicate with AWS services directly, bypassing the public internet. This maximizes security and meets the constraints. The IAM policy is also appropriately scoped to only the necessary actions.
-       - D. Similar to option C, this provides the required VPC endpoints, but the IAM policy is too permissive ("allows all actions for all EC2 resources"). This doesn't align with the principle of least privilege, which is a key part of maximizing security.
-       Therefore, option C appears to be the best choice to meet the company's requirements for a secure, supported integration between AWS and its SAP system.
+       D.
+      API Gateway provides a feature called "Mock Integration" which allows you to return a specific response without invoking any backend service. By using request mapping templates, you can decide which mock response to return based on the incoming request.
 
     </details>
 
-45. A company is running SAP on anyDB at a remote location that has slow and inconsistent internet connectivity. The company wants to migrate its system to AWS and wants to convert its database to SAP HANA during this process. Because of the inconsistent internet connection, the company has not established connectivity between the remote location and the company’s VPC in the AWS Cloud. How should the company perform this migration?
-    - [ ] A. Migrate by using SAP HANA system replication over the internet connection. Specify a public IP address on the target system.
-    - [ ] B. Migrate by using SAP Software Update Manager (SUM) Database Migration Option (DMO) with System Move. Use an AWS Snowball Edge Storage Optimized device to transfer the SAP export files to AWS.
-    - [ ] C. Migrate by using SAP HANA system replication with initialization through backup and restore. Use an AWS Snowball Edge Storage Optimized device to transfer the SAP export files to AWS.
-    - [ ] D. Migrate by using SAP Software Update Manager (SUM) Database Migration Option (DMO) with System Move. Use Amazon Elastic File System (Amazon EFS) to transfer the SAP export files to AWS.
+49. A developer is using an AWS Lambda function to generate avatars for profile pictures that are uploaded to an Amazon S3 bucket. The Lambda function is automatically invoked for profile pictures that are saved under the /original/ S3 prefix. The developer notices that some pictures cause the Lambda function to time out. The developer wants to implement a fallback mechanism by using another Lambda function that resizes the profile picture. Which solution will meet these requirements with the LEAST development effort?
+    - [ ] A. Set the image resize Lambda function as a destination of the avatar generator Lambda function for the events that fail processing.
+    - [ ] B. Create an Amazon Simple Queue Service (Amazon SQS) queue. Set the SQS queue as a destination with an on failure condition for the avatar generator Lambda function. Configure the image resize Lambda function to poll from the SQS queue.
+    - [ ] C. Create an AWS Step Functions state machine that invokes the avatar generator Lambda function and uses the image resize Lambda function as a fallback. Create an Amazon EventBridge rule that matches events from the S3 bucket to invoke the state machine.
+    - [ ] D. Create an Amazon Simple Notification Service (Amazon SNS) topic. Set the SNS topic as a destination with an on failure condition for the avatar generator Lambda function. Subscribe the image resize Lambda function to the SNS topic.
 
     <details>
        <summary>Answer</summary>
 
-       B.
-       - A: While SAP HANA system replication over the internet is a legitimate method of migration, it heavily relies on a stable and fast internet connection. Given the scenario, this is not suitable due to the inconsistent internet connection.
-       - B: Using the SAP Software Update Manager (SUM) Database Migration Option (DMO) with System Move is a method that combines the update and migration processes. It's suitable for systems that are being moved to the cloud. The AWS Snowball Edge Storage Optimized device is a physical device that you can use to move terabytes to petabytes of data into and out of AWS, without relying on an internet connection. Given the inconsistency of the internet connection in the scenario, using Snowball Edge to transfer the SAP export files makes sense.
-       - C: This option combines SAP HANA system replication with initialization through backup and restore, and using an AWS Snowball Edge device. While the use of Snowball is suitable, this method adds a level of complexity in initializing replication through backup and restore.
-       - D: The use of SUM DMO with System Move is appropriate, but using Amazon Elastic File System (Amazon EFS) for transfer would require a consistent internet connection, which is not the case in the scenario described.
+       A:
+        Lambda destinations allow you to specify another AWS resource (like another Lambda function, SQS, SNS, etc.) to route the results of a Lambda function (success or failure). This approach allows for a direct connection between the primary Lambda function and the fallback function without the need for extra components or configurations.
 
     </details>
 
-46. A company runs its SAP ERP 6.0 EHP 8 system on SAP HANA on AWS. The system is deployed on an r4.16xlarge Amazon EC2 instance with default tenancy. The company needs to migrate the SAP HANA database to an x2gd.16xlarge High Memory instance. After an operations engineer changes the instance type and starts the instance, the AWS Management Console shows a failed instance status check. What is the cause of this problem?
-    - [ ] A. The operations engineer missed the network configuration step during the post-migration activities.
-    - [ ] B. The operations engineer missed the Amazon CloudWatch configuration step during the post-migration activities.
-    - [ ] C. The operations engineer did not install Elastic Network Adapter (ENA) drivers before changing the instance type.
-    - [ ] D. The operations engineer did not create a new AMI from the original instance and did not launch a new instance with dedicated tenancy from the AMI.
-
-    <details>
-       <summary>Answer</summary>
-
-       C.
-       The r4.16xlarge and x2gd.16xlarge EC2 instances are part of different families and might have different networking capabilities. The x2gd.16xlarge instance type supports Enhanced Networking with Elastic Network Adapter (ENA), and it requires that the ENA driver is installed to function properly. If the driver is not installed and enabled, then the instance might not pass the instance status check after a change in instance type.
-
-    </details>
-
-47. A company uses an SAP application that runs batch jobs that are performance sensitive. The batch jobs can be restarted safely. The SAP application has six application servers. The SAP application functions reliably as long as the SAP application availability remains greater than 60%. The company wants to migrate the SAP application to AWS. The company is using a cluster with two Availability Zones. How should the company distribute the SAP application servers to maintain system reliability?
-    - [ ] A. Distribute the SAP application servers equally across three partition placement groups.
-    - [ ] B. Distribute the SAP application servers equally across three Availability Zones.
-    - [ ] C. Distribute the SAP application servers equally across two Availability Zones.
-    - [ ] D. Create an Amazon EC2 Auto Scaling group across two Availability Zones. Set a minimum capacity value of 4.
+50. A developer needs to migrate an online retail application to AWS to handle an anticipated increase in traffic. The application currently runs on two servers: one server for the web application and another server for the database. The web server renders webpages and manages session state in memory. The database server hosts a MySQL database that contains order details. When traffic to the application is heavy, the memory usage for the web server approaches 100% and the application slows down considerably. The developer has found that most of the memory increase and performance decrease is related to the load of managing additional user sessions. For the web server migration, the developer will use Amazon EC2 instances with an Auto Scaling group behind an Application Load Balancer. Which additional set of changes should the developer make to the application to improve the application's performance?
+    - [ ] A. Use an EC2 instance to host the MySQL database. Store the session data and the application data in the MySQL database.
+    - [ ] B. Use Amazon ElastiCache for Memcached to store and manage the session data. Use an Amazon RDS for MySQL DB instance to store the application data.
+    - [ ] C. Use Amazon ElastiCache for Memcached to store and manage the session data and the application data.
+    - [ ] D. Use the EC2 instance store to manage the session data. Use an Amazon RDS for MySQL DB instance to store the application data.
 
     <details>
        <summary>Answer</summary>
 
        B.
-       With this approach, if one AZ goes down, the Auto Scaling group will work to maintain the minimum capacity of 4 servers by launching instances in the available AZ. Therefore, even with the loss of an entire AZ, the SAP application would still have 4 servers running, maintaining 66.6% availability, which is above the required 60%.
 
     </details>
 
-48. A company wants to migrate its SAP S/4HANA software from on premises to AWS in a few weeks. An SAP solutions architect plans to use AWS Launch Wizard for SAP to automate the SAP deployment on AWS. Which combination of steps must the SAP solutions architect take to use Launch Wizard to meet these requirements? (Choose two.)
-    - [ ] A. Download the SAP software files from the SAP Support Portal. Upload the SAP software files to Amazon S3. Provide the S3 bucket path as an input to Launch Wizard.
-    - [ ] B. Provide the SAP S-user ID and password as inputs to Launch Wizard to download the software automatically.
-    - [ ] C. Format the S3 file path syntax according to the Launch Wizard deployment recommendation.
-    - [ ] D. Use an AWS CloudFormation template for the automated deployment of the SAP landscape.
-    - [ ] E. Provision Amazon EC2 instances. Tag the instances to install SAP S/4HANA on them.
+51. A company is using an AWS Lambda function to process records from an Amazon Kinesis data stream. The company recently observed slow processing of the records. A developer notices that the iterator age metric for the function is increasing and that the Lambda run duration is constantly above normal. Which actions should the developer take to increase the processing speed? (Choose two.)
+    - [ ] A. Increase the number of shards of the Kinesis data stream.
+    - [ ] B. Decrease the timeout of the Lambda function.
+    - [ ] C. Increase the memory that is allocated to the Lambda function.
+    - [ ] D. Decrease the number of shards of the Kinesis data stream.
+    - [ ] E. Increase the timeout of the Lambda function.
 
     <details>
        <summary>Answer</summary>
 
        AC.
-      - Provide the necessary SAP software files. These files can be uploaded to an Amazon S3 bucket, and then you'll provide the path to those files in the Launch Wizard. This is because AWS doesn't have rights to download the software from SAP Support Portal on your behalf.
-      - Make sure the S3 file path is correctly formatted according to the recommendations of the Launch Wizard, which makes it possible for the Launch Wizard to access and use the SAP software files for deployment.
 
     </details>
 
-49. A company wants to migrate its SAP landscape from on premises to AWS. What are the MINIMUM requirements that the company must meet to ensure full support of SAP on AWS? (Choose three.)
-    - [ ] A. Enable detailed monitoring for Amazon CloudWatch on each instance in the landscape.
-    - [ ] B. Deploy the infrastructure by using SAP Cloud Appliance Library.
-    - [ ] C. Install, configure, and run the AWS Data Provider for SAP on each instance in the landscape.
-    - [ ] D. Protect all production instances by using Amazon EC2 automatic recovery.
-    - [ ] E. Deploy the infrastructure for the SAP landscape by using AWS Launch Wizard for SAP.
-    - [ ] F. Deploy the SAP landscape on an AWS account that has either an AWS Business Support plan or an AWS Enterprise Support plan.
-
-    <details>
-       <summary>Answer</summary>
-
-       ACF.
-       - <https://docs.aws.amazon.com/sap/latest/general/overview-sap-on-aws.html>
-
-    </details>
-
-50. An SAP specialist is building an SAP environment. The SAP environment contains Amazon EC2 instances that run in a private subnet in a VPC. The VPC includes a NAT gateway. The SAP specialist is setting up IBM Db2 high availability disaster recovery for the SAP cluster. After configuration of overlay IP address routing, traffic is not routing to the database EC2 instances. What should the SAP specialist do to resolve this issue?
-    - [ ] A. Open a security group for SAP ports to allow traffic on port 443.
-    - [ ] B. Create route table entries to allow traffic from the database EC2 instances to the NAT gateway.
-    - [ ] C. Turn off the source/destination check for the database EC2 instances.
-    - [ ] D. Create an IAM role that has permission to access network traffic. Associate the role with the database EC2 instances.
+52. A company needs to harden its container images before the images are in a running state. The company's application uses Amazon Elastic Container Registry (Amazon ECR) as an image registry. Amazon Elastic Kubernetes Service (Amazon EKS) for compute, and an AWS CodePipeline pipeline that orchestrates a continuous integration and continuous delivery (CI/CD) workflow. Dynamic application security testing occurs in the final stage of the pipeline after a new image is deployed to a development namespace in the EKS cluster. A developer needs to place an analysis stage before this deployment to analyze the container image earlier in the CI/CD pipeline. Which solution will meet these requirements with the MOST operational efficiency?
+    - [ ] A. Build the container image and run the docker scan command locally. Mitigate any findings before pushing changes to the source code repository. Write a pre-commit hook that enforces the use of this workflow before commit.
+    - [ ] B. Create a new CodePipeline stage that occurs after the container image is built. Configure ECR basic image scanning to scan on image push. Use an AWS Lambda function as the action provider. Configure the Lambda function to check the scan results and to fail the pipeline if there are findings.
+    - [ ] C. Create a new CodePipeline stage that occurs after source code has been retrieved from its repository. Run a security scanner on the latest revision of the source code. Fail the pipeline if there are findings.
+    - [ ] D. Add an action to the deployment stage of the pipeline so that the action occurs before the deployment to the EKS cluster. Configure ECR basic image scanning to scan on image push. Use an AWS Lambda function as the action provider. Configure the Lambda function to check the scan results and to fail the pipeline if there are findings.
 
     <details>
        <summary>Answer</summary>
@@ -722,11 +771,34 @@
 
     </details>
 
-51. A company has deployed its SAP applications into multiple Availability Zones in the same AWS Region. To accommodate storage of media files, database table export and import, and files dropped by third-party tools, the company has mounted Amazon Elastic File System (Amazon EFS) file systems between the SAP instances. The company needs to retrieve the files quickly for installations, updates, and system refreshes. Over time, the EFS file systems have grown exponentially to multiple terabytes. An SAP solutions architect must optimize storage cost for the files that are stored in Amazon EFS. Which solution will meet this requirement with the LEAST administrative overhead?
-    - [ ] A. Scan the files manually to identify unnecessary files. Delete the unnecessary files.
-    - [ ] B. Move the files to Amazon S3 Glacier Deep Archive.
-    - [ ] C. Apply a lifecycle policy on the files in Amazon EFS to move the files to EFS Standard-Infrequent Access (Standard-IA).
-    - [ ] D. Move the files to Amazon S3 Glacier. Apply an S3 Glacier vault lock policy to the files.
+53. A developer is testing a new file storage application that uses an Amazon CloudFront distribution to serve content from an Amazon S3 bucket. The distribution accesses the S3 bucket by using an origin access identity (OAI). The S3 bucket's permissions explicitly deny access to all other users. The application prompts users to authenticate on a login page and then uses signed cookies to allow users to access their personal storage directories. The developer has configured the distribution to use its default cache behavior with restricted viewer access and has set the origin to point to the S3 bucket. However, when the developer tries to navigate to the login page, the developer receives a 403 Forbidden error. The developer needs to implement a solution to allow unauthenticated access to the login page. The solution also must keep all private content secure. Which solution will meet these requirements?
+    - [ ] A. Add a second cache behavior to the distribution with the same origin as the default cache behavior. Set the path pattern for the second cache behavior to the path of the login page, and make viewer access unrestricted. Keep the default cache behavior’s settings unchanged.
+    - [ ] B. Add a second cache behavior to the distribution with the same origin as the default cache behavior. Set the path pattern for the second cache behavior to *, and make viewer access restricted. Change the default cache behavior's path pattern to the path of the login page, and make viewer access unrestricted.
+    - [ ] C. Add a second origin as a failover origin to the default cache behavior. Point the failover origin to the S3 bucket. Set the path pattern for the primary origin to * and make viewer access restricted. Set the path pattern for the failover origin to the path of the login page, and make viewer access unrestricted.
+    - [ ] D. Add a bucket policy to the S3 bucket to allow read access. Set the resource on the policy to the Amazon Resource Name (ARN) of the login page object in the S3 bucket. Add a CloudFront function to the default cache behavior to redirect unauthorized requests to the login page’s S3 URI.
+
+    <details>
+       <summary>Answer</summary>
+
+       A.
+       The S3 bucket denies access to all users except the OAI associated with the CloudFront distribution.
+       1. Users authenticate through a login page.
+       2. After authentication, signed cookies allow access to personal storage directories.
+       3. Currently, there's a 403 Forbidden error when trying to access the login page, indicating it's not publicly accessible.
+       Given the options:
+       - A. This option involves creating a second cache behavior that matches the path of the login page and making viewer access unrestricted. This would mean that when CloudFront gets a request matching the login page's path, it would not require signed cookies, allowing public access to the login page. Meanwhile, the default cache behavior would handle all other paths and require signed cookies. This seems like a potential solution.
+       - B. Setting the path pattern of the second cache behavior to * and changing the default cache behavior's path pattern to the login page's path seems counterintuitive and may result in misconfiguration.
+       - C. CloudFront doesn't support the concept of a "failover origin" in the manner described in this option.
+       - D. The problem with this solution is that direct read access to the login page object in the S3 bucket bypasses CloudFront, which is not recommended as it might expose the S3 URL to the users. Additionally, redirecting unauthorized requests to the S3 URI may expose the S3 URL and cause potential security concerns.
+
+    </details>
+
+54. A developer is using AWS Amplify Hosting to build and deploy an application. The developer is receiving an increased number of bug reports from users. The developer wants to add end-to-end testing to the application to eliminate as many bugs as possible before the bugs reach production. Which solution should the developer implement to meet these requirements?
+    - [ ] A. Run the amplify add test command in the Amplify CLI.
+    - [ ] B. Create unit tests in the application. Deploy the unit tests by using the amplify push command in the Amplify CLI.
+    - [ ] C. Add a test phase to the amplify.yml build settings for the application.
+    - [ ] D. Add a test phase to the aws-exports.js file for the application.
+
     <details>
        <summary>Answer</summary>
 
@@ -734,52 +806,24 @@
 
     </details>
 
-52. A company wants to migrate its on-premises servers to AWS. These servers include SAP ERP Central Component (SAP ECC) on Oracle Database. The company is running SAP ECC application servers and Oracle Database servers on AIX. The company must migrate the SAP workloads to AWS with minimal changes. Which solution will meet these requirements?
-    - [ ] A. Perform a heterogeneous migration for SAP on AWS. Specify the SAP ECC application servers to run on SUSE Linux Enterprise Server. Specify Oracle Database to run on Oracle Enterprise Linux on a Dedicated Host.
-    - [ ] B. Perform a homogeneous migration for SAP on AWS. Specify the SAP ECC application servers and Oracle Database to run on AIX.
-    - [ ] C. Perform a heterogeneous migration for SAP on AWS. Specify the SAP ECC application servers and Oracle Database to run on Oracle Enterprise Linux.
-    - [ ] D. Perform a heterogeneous migration for SAP on AWS. Specify the SAP ECC application servers and Oracle Database to run on Windows.
+55. An ecommerce company is using an AWS Lambda function behind Amazon API Gateway as its application tier. To process orders during checkout, the application calls a POST API from the frontend. The POST API invokes the Lambda function asynchronously. In rare situations, the application has not processed orders. The Lambda application logs show no errors or failures. What should a developer do to solve this problem?
+    - [ ] A. Inspect the frontend logs for API failures. Call the POST API manually by using the requests from the log file.
+    - [ ] B. Create and inspect the Lambda dead-letter queue. Troubleshoot the failed functions. Reprocess the events.
+    - [ ] C. Inspect the Lambda logs in Amazon CloudWatch for possible errors. Fix the errors.
+    - [ ] D. Make sure that caching is disabled for the POST API in API Gateway.
 
     <details>
        <summary>Answer</summary>
 
-       C.
-       - Heterogeneous Migration: This involves moving from one operating system or database architecture to another. For instance, moving from AIX to Linux would be a heterogeneous migration.
-       - Homogeneous Migration: This involves moving to a similar environment, like moving between the same operating systems and database architectures.
-
-       The company is currently running SAP ECC application servers and Oracle Database servers on AIX. The objective is to migrate to AWS with minimal changes.
-       - A. This option involves moving SAP ECC to SUSE Linux Enterprise Server and the Oracle Database to Oracle Enterprise Linux on a Dedicated Host. This is a heterogeneous migration, as it involves moving from AIX to Linux.
-       - B. This option would maintain the AIX platform for both SAP ECC and Oracle Database. However, AWS does not support AIX natively, making this option unfeasible.
-       - C. This option involves moving both the SAP ECC application servers and Oracle Database to Oracle Enterprise Linux, making it a heterogeneous migration. This is possible as AWS supports Linux-based instances.
-       - D. This option proposes moving both the SAP ECC application servers and Oracle Database to Windows. This is a heterogeneous migration because it involves moving from AIX to Windows. However, while SAP ECC can run on Windows, it's less common and might introduce more complexity than running on a Linux-based environment.
-
-       Considering the minimal changes requirement and the given options, the most straightforward option would be to perform a heterogeneous migration and use Linux-based instances on AWS, as Linux has robust support for SAP ECC and Oracle.
-
-    </details>
-
-53. A company is migrating its SAP workloads to AWS. The company’s IT team installs a highly available SAP S/4HANA system that uses the SAP HANA system replication cluster package on SUSE Linux Enterprise Server. The IT team deploys the system by using cluster nodes in different Availability Zones within the same AWS Region. After the initial launch of the SAP application, the application is accessible. However, after failover, the IT team cannot access the application even though the system is up and running on the secondary node. After investigation, an SAP solutions architect discovers that the virtual IP address has not been used correctly. Which combination of steps should the SAP solutions architect take to resolve this problem? (Choose two.)
-    - [ ] A. Use an overlay IP address as a secondary IP address with the primary node of the cluster.
-    - [ ] B. Choose an overlay IP address within the VPC CIDR block that corresponds with the secondary node of the cluster.
-    - [ ] C. Use an overlay IP address as a virtual IP address.
-    - [ ] D. Choose an overlay IP address within the VPC CIDR block that corresponds with the primary node of the cluster.
-    - [ ] E. Choose an overlay IP address outside the VPC CIDR block that hosts the application and the database.
-
-    <details>
-       <summary>Answer</summary>
-
-       CE.
-
-    </details>
-
-54. A company needs to implement high availability for its SAP S/4HANA system on AWS. The company will use a SUSE Linux Enterprise Server clustering solution in private subnets across two Availability Zones. An SAP solutions architect must ensure that the solution can route traffic to the active SAP instance in this clustered configuration. What should the SAP solutions architect do to meet these requirements?
-    - [ ] A. Implement the SAP cluster solution by using a secondary private IP address. Reassign the secondary private IP address from one network interface to another network interface in the event of any failure that affects the primary instance.
-    - [ ] B. Implement the SAP cluster solution by using an Elastic IP address. Mask the failure of an instance or software by rapidly remapping the address to another instance in the account.
-    - [ ] C. Implement the SAP cluster solution by using a public IP address. Use this public IP address for communication between the instances and the internet.
-    - [ ] D. Implement the SAP cluster solution by using an overlay IP address that is outside the CIDR block of the VPC. Use overlay IP address routing to dynamically update the route table to point to the active node and provide external access by using a Network Load Balancer or AWS Transit Gateway.
-
-    <details>
-       <summary>Answer</summary>
-
-       D.
+       B.
+       The POST API invokes the Lambda function asynchronously.
+       1. In rare situations, the application has not processed orders.
+       2. Lambda application logs show no errors or failures.
+       3. Given this, it suggests that the Lambda function might have encountered an error when trying to process the event, but this error hasn't been captured or handled in the logs. When Lambda is invoked asynchronously and it encounters an error that prevents the function from processing the event, AWS Lambda can be set up to send the event to a dead-letter queue (DLQ) for further analysis.
+       Let's evaluate the options:
+       - A. If the Lambda logs show no errors, and given that the issue is with order processing in the backend, inspecting frontend logs might not provide much insight into the Lambda processing issue.
+       - B. A dead-letter queue (DLQ) captures unprocessed events caused by any error when a Lambda function is invoked asynchronously. If a Lambda function is set up with a DLQ, you can determine the cause of an error by inspecting the DLQ. This approach allows for troubleshooting and reprocessing events.
+       - C. The problem statement already mentioned that the Lambda application logs show no errors or failures, so revisiting the Lambda logs may not be productive.
+       - D. Caching for POST API requests is not typical. POST requests usually entail changing data or state on the server-side, and it's not recommended to cache such requests. However, while this is a best practice, it doesn't directly address the issue described.
 
     </details>
