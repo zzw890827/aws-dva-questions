@@ -1022,3 +1022,16 @@
        A.
 
     </details>
+
+70. An application uses Lambda functions to extract metadata from files uploaded to an S3 bucket; the metadata is stored in Amazon DynamoDB. The application starts behaving unexpectedly, and the developer wants to examine the logs of the Lambda function code for errors. Based on this system configuration, where would the developer find the logs?
+    - [ ] A. Amazon S3
+    - [ ] B. AWS CloudTrail
+    - [ ] C. Amazon CloudWatch
+    - [ ] D. Amazon DynamoDB
+
+    <details>
+       <summary>Answer</summary>
+
+       C.
+
+    </details>
