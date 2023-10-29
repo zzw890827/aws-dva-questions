@@ -1,4 +1,4 @@
-# AWS DAV 02
+# AWS DVA 02
 
 1. A developer is working on an existing application that uses Amazon DynamoDB as its data store. The DynamoDB table has the following attributes: partNumber (partition key), vendor (sort key), description, productFamily, and productType. When the developer analyzes the usage patterns, the developer notices that there are application modules that frequently look for a list of products based on the productFamily and productType attributes. The developer wants to make changes to the application to improve performance of the query operations. Which solution will meet these requirements?
    - [ ] A. Create a global secondary index (GSI) with productFamily as the partition key and productType as the sort key.
