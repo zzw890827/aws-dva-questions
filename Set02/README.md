@@ -195,10 +195,30 @@ Which CodeCommit event will meet these requirements?
     - [ ] C. Modify the Lambda function by fixing the code. Test the Lambda function. Create the alias hotfix. Point the alias to the $LATEST version.
     - [ ] D. Modify the Lambda function by fixing the code. Test the Lambda function. When the Lambda function is working as expected, publish the Lambda function as a new version. Create the alias hotfix. Point the alias to the new version.
     - [ ] E. Create a new API Gateway API for the development environment. Add a resource and method with Lambda integration. Choose the Lambda function and the hotfix alias. Deploy to a new stage. Test the backend.
+
     <details>
        <summary>Answer</summary>
 
        BD.
+       - Option C:
+         1. Modify the Lambda function by fixing the code.
+         2. Test the Lambda function.
+         3. Create the alias hotfix.
+         4. Point the alias to the $LATEST version.
+       - Option D:
+         1. Modify the Lambda function by fixing the code.
+         2. Test the Lambda function.
+         3. When the Lambda function is working as expected, publish the Lambda function as a new version.
+         4. Create the alias hotfix.
+         5. Point the alias to the new version.
+       - Key Differences:
+         - Versioning:
+           - In C: After testing, the alias "hotfix" is pointed to the $LATEST version.
+           - In D: After testing, the Lambda function is published as a new version. Then the "hotfix" alias points to this new version, not $LATEST.
+         - Stability & Best Practices:
+           - In C: Pointing an alias to $LATEST is generally not recommended for production or stable environments. The $LATEST version always points to the most recent code. If someone modifies the code in the Lambda function, the hotfix alias would immediately reflect these changes, which could introduce instability.
+           - In D: By publishing the code as a new version and pointing the alias to that specific version, it ensures that the "hotfix" alias won't accidentally execute newer (and potentially untested) code changes.
+       - In summary, the main difference is in how the "hotfix" alias is used. Option D follows best practices by creating a new version of the Lambda function and pointing the alias to that specific version, ensuring stability and predictability. Option C, on the other hand, points the alias to $LATEST, which can be more volatile and isn't generally recommended for production or stable use cases.
 
     </details>
 
@@ -385,7 +405,12 @@ Which CodeCommit event will meet these requirements?
     <details>
        <summary>Answer</summary>
 
-       A
+       A.
+       - By creating a new version of the Lambda function, you maintain the original version, which ensures the current users are not affected by the new code.
+       - API Gateway allows multiple stages. Creating a new stage specifically for testing ensures that it doesn't interfere with the production stage. Developers can test using this new stage, while customers continue using the existing stage.
+       - B. This approach would result in 10% of traffic (including real customer traffic) being routed to the new Lambda version. This could lead to potential impacts on customers.
+       - C. Introducing a filtering Lambda function adds complexity and overhead. It could also introduce latency since requests now have to pass through an additional Lambda function.
+       - D. Creating a new API Gateway API altogether is overkill for testing a new version of a Lambda function. A new stage in the existing API is simpler and achieves the same goal.
 
     </details>
 
@@ -451,7 +476,7 @@ Which CodeCommit event will meet these requirements?
     <details>
        <summary>Answer</summary>
 
-       A.
+       B.
        Amazon Macie can be used to discover sensitive data like credit card information in S3 buckets. The classification for financial data, including credit card numbers, would fall under the `SensitiveData:S3Object/Financial` finding type.
 
     </details>
@@ -467,6 +492,11 @@ Which CodeCommit event will meet these requirements?
        <summary>Answer</summary>
 
        BD.
+       1. The company needs an authentication process that identifies users with accounts.
+       2. 2The company needs to track guest users who eventually create an account.
+       3. Guest users should be able to access sample content.
+       4. B: Identity Pools handle the creation of unique identities for users and grant temporary AWS credentials. By configuring the identity pool to allow unauthenticated users, you are giving guest users a way to access resources with temporary AWS credentials.
+       5. D: By creating separate IAM roles for authenticated and unauthenticated users, you can control the access levels based on user status. Authenticated users get access to everything, whereas unauthenticated (guest) users can only access sample content.
 
     </details>
 
@@ -478,9 +508,8 @@ Which CodeCommit event will meet these requirements?
     <details>
        <summary>Answer</summary>
 
-       AB.
-      - A. This will ensure that even if the stack is deleted or the database resource is removed from the template, the database will not be deleted.
-      - B. By denying update actions on the database resource, you can prevent unintentional changes that might be harmful.
+       B.
+      AWSLambdaVPCAccessExecutionRole is a managed AWS IAM policy that grants a Lambda function permissions to manage Elastic Network Interfaces (ENIs) in a VPC. Lambda creates and manages these ENIs on your behalf, enabling the function to connect to other resources in a VPC. The second part of this option is also right: you would need to modify the RDS security group to allow inbound traffic from the Lambda function's security group.
 
     </details>
 
@@ -886,7 +915,7 @@ Which CodeCommit event will meet these requirements?
     - [ ] A. Store the database credentials in the environment variables of the Lambda function. Deploy the Lambda function with the new credentials every 30 days.
     - [ ] B. Store the database credentials in AWS Secrets Manager. Configure a 30-day rotation schedule for the credentials.
     - [ ] C. Store the database credentials in AWS Systems Manager Parameter Store secure strings. Configure a 30-day schedule for the secure strings.
-    - [ ] D. Store the database credentials in an Amaz
+    - [ ] D. Store the database credentials in an Amazon S3 bucket that uses server-side encryption with customer-provided encryption keys (SSE-C). Configure a 30-day key rotation schedule for the customer key.
 
     <details>
        <summary>Answer</summary>
