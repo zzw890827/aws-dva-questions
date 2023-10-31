@@ -541,25 +541,178 @@
 
     </details>
 
-36. A company is updating an application to move the backend of the application from Amazon EC2 instances to a serverless model. The application uses an Amazon RDS for MySQL DB instance and runs in a single VPC on AWS. The application and the DB instance are deployed in a private subnet in the VPC. The company needs to connect AWS Lambda functions to the DB instance. Which solution will meet these requirements?
-    - [ ] A. Create Lambda functions inside the VPC with the AWSLambdaBasicExecutionRole policy attached to the Lambda execution role. Modify the RDS security group to allow inbound access from the Lambda security group.
-    - [ ] B. Create Lambda functions inside the VPC with the AWSLambdaVPCAccessExecutionRole policy attached to the Lambda execution role. Modify the RDS security group to allow inbound access from the Lambda security group.
-    - [ ] C. Create Lambda functions with the AWSLambdaBasicExecutionRole policy attached to the Lambda execution role. Create an interface VPC endpoint for the Lambda functions. Configure the interface endpoint policy to allow the lambda:InvokeFunclion action for each Lambda function's Amazon Resource Name (ARN).
-    - [ ] D. Create Lambda functions with the AWSLambdaVPCAccessExecutionRole policy attached to the Lambda execution role. Create an interface VPC endpoint for the Lambda functions. Configure the interface endpoint policy to allow the lambda:InvokeFunction action for each Lambda function's Amazon Resource Name (ARN).
+36. When a Developer tries to run an AWS CodeBuild project, it raises an error because the length of all environment variables exceeds the limit for the combined maximum of characters. What is the recommended solution?
+    - [ ] A. Add the export LC_ALL=ג€en_US.utf8ג€ command to the pre_build section to ensure POSIX localization.
+    - [ ] B. Use Amazon Cognito to store key-value pairs for large numbers of environment variables.
+    - [ ] C. Update the settings for the build project to use an Amazon S3 bucket for large numbers of environment variables.
+    - [ ] D. Use AWS Systems Manager Parameter Store to store large numbers of environment variables.
+
+    <details>
+       <summary>Answer</summary>
+
+       D.
+
+    </details>
+
+37. A company is expanding the compatibility of its photo-sharing mobile app to hundreds of additional devices with unique screen dimensions and resolutions. Photos are stored in Amazon S3 in their original format and resolution. The company uses an Amazon CloudFront distribution to serve the photos. The app includes the dimension and resolution of the display as GET parameters with every request. A developer needs to implement a solution that optimizes the photos that are served to each device to reduce load time and increase photo quality. Which solution will meet these requirements MOST cost-effectively?
+    - [ ] A. Use S3 Batch Operations to invoke an AWS Lambda function to create new variants of the photos with the required dimensions and resolutions. Create a dynamic CloudFront origin that automatically maps the request of each device to the corresponding photo variant.
+    - [ ] B. Use S3 Batch Operations to invoke an AWS Lambda function to create new variants of the photos with the required dimensions and resolutions. Create a Lambda@Edge function to route requests to the corresponding photo variant by using request headers.
+    - [ ] C. Create a Lambda@Edge function that optimizes the photos upon request and returns the photos as a response. Change the CloudFront TTL cache policy to the maximum value possible.
+    - [ ] D. Create a Lambda@Edge function that optimizes the photos upon request and returns the photos as a response. In the same function, store a copy of the processed photos on Amazon S3 for subsequent requests.
+
+    <details>
+       <summary>Answer</summary>
+
+       D.
+
+    </details>
+
+38. A company is building an application for stock trading. The application needs sub-millisecond latency for processing trade requests. The company uses Amazon DynamoDB to store all the trading data that is used to process each trading request. A development team performs load testing on the application and finds that the data retrieval time is higher than expected. The development team needs a solution that reduces the data retrieval time with the least possible effort. Which solution meets these requirements?
+    - [ ] A. Add local secondary indexes (LSIs) for the trading data.
+    - [ ] B. Store the trading data in Amazon S3, and use S3 Transfer Acceleration.
+    - [ ] C. Add retries with exponential backoff for DynamoDB queries.
+    - [ ] D. Use DynamoDB Accelerator (DAX) to cache the trading data.
+    <details>
+       <summary>Answer</summary>
+
+       D.
+
+    </details>
+
+39. A developer is working on a Python application that runs on Amazon EC2 instances. The developer wants to enable tracing of application requests to debug performance issues in the code. Which combination of actions should the developer take to achieve this goal? (Choose two.)
+    - [ ] A. Install the Amazon CloudWatch agent on the EC2 instances.
+    - [ ] B. Install the AWS X-Ray daemon on the EC2 instances.
+    - [ ] C. Configure the application to write JSON-formatted logs to /var/log/cloudwatch.
+    - [ ] D. Configure the application to write trace data to /var/log/xray.
+    - [ ] E. Install and configure the AWS X-Ray SDK for Python in the application.
+
+    <details>
+       <summary>Answer</summary>
+
+       BE.
+
+    </details>
+
+40. A company has an application that runs as a series of AWS Lambda functions. Each Lambda function receives data from an Amazon Simple Notification Service (Amazon SNS) topic and writes the data to an Amazon Aurora DB instance. To comply with an information security policy, the company must ensure that the Lambda functions all use a single securely encrypted database connection string to access Aurora. Which solution will meet these requirements?
+    - [ ] A. Use IAM database authentication for Aurora to enable secure database connections for all the Lambda functions.
+    - [ ] B. Store the credentials and read the credentials from an encrypted Amazon RDS DB instance.
+    - [ ] C. Store the credentials in AWS Systems Manager Parameter Store as a secure string parameter.
+    - [ ] D. Use Lambda environment variables with a shared AWS Key Management Service (AWS KMS) key for encryption.
+
+    <details>
+       <summary>Answer</summary>
+
+       C.
+
+    </details>
+
+41. A developer is troubleshooting an Amazon API Gateway API. Clients are receiving HTTP 400 response errors when the clients try to access an endpoint of the API. How can the developer determine the cause of these errors?\
+    - [ ] A. Create an Amazon Kinesis Data Firehose delivery stream to receive API call logs from API Gateway. Configure Amazon CloudWatch Logs as the delivery stream’s destination.
+    - [ ] B. Turn on AWS CloudTrail Insights and create a trail. Specify the Amazon Resource Name (ARN) of the trail for the stage of the API.
+    - [ ] C. Turn on AWS X-Ray for the API stage. Create an Amazon CloudWatch Logs log group. Specify the Amazon Resource Name (ARN) of the log group for the API stage.
+    - [ ] D. Turn on execution logging and access logging in Amazon CloudWatch Logs for the API stage Create a CloudWatch Logs log group. Specify the Amazon Resource Name (ARN) of the log group for the API stage.
+
+    <details>
+       <summary>Answer</summary>
+
+       D.
+
+    </details>
+
+42. A company developed an API application on AWS by using Amazon CloudFront, Amazon API Gateway, and AWS Lambda. The API has a minimum of four requests every second. A developer notices that many API users run the same query by using the POST method. The developer wants to cache the POST request to optimize the API resources. Which solution will meet these requirements?
+    - [ ] A. Configure the CloudFront cache. Update the application to return cached content based upon the default request headers.
+    - [ ] B. Override the cache method in the selected stage of API Gateway. Select the POST method.
+    - [ ] C. Save the latest request response in Lambda /tmp directory. Update the Lambda function to check the /tmp directory.
+    - [ ] D. Save the latest request in AWS Systems Manager Parameter Store. Modify the Lambda function to take the latest request response from Parameter Store.
+
+    <details>
+       <summary>Answer</summary>
+
+       B.
+       - A. Amazon CloudFront primarily caches based on GET requests and uses the URL (and potentially some headers, cookies, or query strings) as the cache key. POST requests are typically not cached because they can modify data on the backend, and their payload (body) isn't considered in the caching key.
+       - B. API Gateway provides caching capabilities. By enabling caching on a stage, you can cache responses from your API methods. To cache responses to POST requests, you can customize the cache key to include specific headers, query string parameters, or path parameters from the request. This is the most appropriate solution among the given options.
+       - C. Storing data in the Lambda /tmp directory is ephemeral and can't be relied upon for caching between invocations. There's no guarantee that two successive calls from an API user will land on the same container, and hence this isn't a reliable caching mechanism.
+       - D. AWS Systems Manager Parameter Store isn't designed for caching frequently accessed data. It's designed for configuration management and isn't optimized for high-frequency reads. Relying on it for caching can lead to throttling issues.
+
+    </details>
+
+43. A company is building a microservices application that consists of many AWS Lambda functions. The development team wants to use AWS Serverless Application Model (AWS SAM) templates to automatically test the Lambda functions. The development team plans to test a small percentage of traffic that is directed to new updates before the team commits to a full development of the application. Which combination of steps will meet these requirements in the MOST operationally efficient way? (Choose two.)
+    - [ ] A. Use AWS SAM CLI commands in AWS CodeDeploy to invoke the Lambda functions to test the deployment.
+    - [ ] B. Declare the EventInvokeConfig on the Lambda functions in the AWS SAM templates with OnSuccess and OnFailure configurations.
+    - [ ] C. Enable gradual deployments through AWS SAM templates.
+    - [ ] D. Set the development preference type to Canary10Percent30Minutes. Use hooks to test the deployment.
+    - [ ] E. Set the development preference type to Linear10Percent10Minutes. Use hooks to test the deployment.
+
+    <details>
+       <summary>Answer</summary>
+
+       CE.
+       - A. AWS SAM CLI commands are used for local development and testing, and AWS CodeDeploy is for deployment. CodeDeploy can deploy and test Lambda versions, but the SAM CLI does not invoke functions within CodeDeploy.
+       - B. The EventInvokeConfig allows you to set up a destination (OnSuccess and OnFailure) for the asynchronous invocation of a Lambda function. This is more about handling the response from async invocations than about deployment preferences.
+       - C. AWS SAM templates support gradual deployments. This is done by setting the deployment preference in the AWS SAM template.
+       - D. The deployment preference type "Canary10Percent30Minutes" means 10% of the traffic will be routed to the new function version for 30 minutes before shifting the rest. "Hooks" can be used to run validation tests during the deployment. This is an appropriate choice for the requirement.
+       - E. The deployment preference type "Linear10Percent10Minutes" means the traffic will be shifted in linear increments of 10% every 10 minutes. Using hooks to test the deployment during these intervals is also a valid option.
+
+    </details>
+
+44. A company is using AWS CloudFormation to deploy a two-tier application. The application will use Amazon RDS as its backend database. The company wants a solution that will randomly generate the database password during deployment. The solution also must automatically rotate the database password without requiring changes to the application. What is the MOST operationally efficient solution that meets these requirements?
+    - [ ] A. Use an AWS Lambda function as a CloudFormation custom resource to generate and rotate the password.
+    - [ ] B. Use an AWS Systems Manager Parameter Store resource with the SecureString data type to generate and rotate the password.
+    - [ ] C. Use a cron daemon on the application’s host to generate and relate the password.
+    - [ ] D. Use an AWS Secrets Manager resource to generate and rotate the password.
+
+    <details>
+       <summary>Answer</summary>
+
+       D.
+
+    </details>
+
+45. A Developer has been asked to create an AWS Lambda function that is triggered any time updates are made to items in an Amazon DynamoDB table. The function has been created, and appropriate permissions have been added to the Lambda execution role. Amazon DynamoDB streams have been enabled for the table, but the function is still not being triggered. Which option would enable DynamoDB table updates to trigger the Lambda function?
+    - [ ] A. Change the StreamViewType parameter value to NEW_AND_OLD_IMAGES for the DynamoDB table
+    - [ ] B. Configure event source mapping for the Lambda function
+    - [ ] C. Map an Amazon SNS topic to the DynamoDB streams
+    - [ ] D. Increase the maximum execution time (timeout) setting of the Lambda function
+
+    <details>
+       <summary>Answer</summary>
+
+       B.
+
+    </details>
+
+46. A developer needs to deploy an application running on AWS Fargate using Amazon ECS. The application has environment variables that must be passed to a container for the application to initialize. How should the environment variables be passed to the container?
+    - [ ] A. Define an array that includes the environment variables under the environment parameter within the service definition.
+    - [ ] B. Define an array that includes the environment variables under the environment parameter within the task definition.
+    - [ ] C. Define an array that includes the environment variables under the entryPoint parameter within the task definition.
+    - [ ] D. Define an array that includes the environment variables under the entryPoint parameter within the service definition.
+
+    <details>
+       <summary>Answer</summary>
+
+       B.
+
+    </details>
+
+47. A development team maintains a web application by using a single AWS CloudFormation template. The template defines web servers and an Amazon RDS database. The team uses the Cloud Formation template to deploy the Cloud Formation stack to different environments. During a recent application deployment, a developer caused the primary development database to be dropped and recreated. The result of this incident was a loss of data. The team needs to avoid accidental database deletion in the future. Which solutions will meet these requirements? (Choose two.)
+    - [ ] A. Add a CloudFormation Deletion Policy attribute with the Retain value to the database resource.
+    - [ ] B. Update the CloudFormation stack policy to prevent updates to the database.
+    - [ ] C. Modify the database to use a Multi-AZ deployment.
+    - [ ] D. Create a CloudFormation stack set for the web application and database deployments.
+    - [ ] E. Add a Cloud Formation DeletionPolicy attribute with the Retain value to the stack.
+
     <details>
        <summary>Answer</summary>
 
        AB.
-      - A. This will ensure that even if the stack is deleted or the database resource is removed from the template, the database will not be deleted.
-      - B. By denying update actions on the database resource, you can prevent unintentional changes that might be harmful.
 
     </details>
 
-37. A company has a web application that runs on Amazon EC2 instances with a custom Amazon Machine Image (AMI). The company uses AWS CloudFormation to provision the application. The application runs in the us-east-1 Region, and the company needs to deploy the application to the us-west-1 Region. An attempt to create the AWS CloudFormation stack in us-west-1 fails. An error message states that the AMI ID does not exist. A developer must resolve this error with a solution that uses the least amount of operational overhead. Which solution meets these requirements?
-    - [ ] A. Change the AWS CloudFormation templates for us-east-1 and us-west-1 to use an AWS AMI. Relaunch the stack for both Regions.
-    - [ ] B. Copy the custom AMI from us-east-1 to us-west-1. Update the AWS CloudFormation template for us-west-1 to refer to AMI ID for the copied AMI. Relaunch the stack.
-    - [ ] C. Build the custom AMI in us-west-1. Create a new AWS CloudFormation template to launch the stack in us-west-1 with the new AMI ID.
-    - [ ] D. Manually deploy the application outside AWS CloudFormation in us-west-1.
+48. A developer is storing sensitive data generated by an application in Amazon S3. The developer wants to encrypt the data at rest A company policy requires an audit trail of when the AWS Key Management Service (AWS KMS) key was used and by whom. Which encryption option will meet these requirements?
+    - [ ] A. Server-side encryption with Amazon S3 managed keys (SSE-S3)
+    - [ ] B. Server-side encryption with AWS KMS managed keys (SSE-KMS)
+    - [ ] C. Server-side encryption with customer-provided keys (SSE-C)
+    - [ ] D. Server-side encryption with self-managed keys
 
     <details>
        <summary>Answer</summary>
@@ -568,137 +721,41 @@
 
     </details>
 
-38. A developer is updating several AWS Lambda functions and notices that all the Lambda functions share the same custom libraries. The developer wants to centralize all the libraries, update the libraries in a convenient way, and keep the libraries versioned. Which solution will meet these requirements with the LEAST development effort?
-    - [ ] A. Create an AWS CodeArtifact repository that contains all the custom libraries.
-    - [ ] B. Create a custom container image for the Lambda functions to save all the custom libraries.
-    - [ ] C. Create a Lambda layer that contains all the custom libraries.
-    - [ ] D. Create an Amazon Elastic File System (Amazon EFS) file system to store all the custom libraries.
-    <details>
-       <summary>Answer</summary>
-
-       C.
-
-    </details>
-
-39. A developer wants to use AWS Elastic Beanstalk to test a new version of an application in a test environment. Which deployment method offers the FASTEST deployment?
-    - [ ] A. Immutable
-    - [ ] B. Rolling
-    - [ ] C. Rolling with additional batch
-    - [ ] D. All at once
+49. A company has an ecommerce application. To track product reviews, the company's development team uses an Amazon DynamoDB table. Every record includes the following: • A Review ID, a 16-digit universally unique identifier (UUID) • A Product ID and User ID, 16-digit UUIDs that reference other tables • A Product Rating on a scale of 1-5 • An optional comment from the user. The table partition key is the Review ID. The most performed query against the table is to find the 10 reviews with the highest rating for a given product. Which index will provide the FASTEST response for this query?
+    - [ ] A. A global secondary index (GSI) with Product ID as the partition key and Product Rating as the sort key
+    - [ ] B. A global secondary index (GSI) with Product ID as the partition key and Review ID as the sort key
+    - [ ] C. A local secondary index (LSI) with Product ID as the partition key and Product Rating as the sort key
+    - [ ] D. A local secondary index (LSI) with Review ID as the partition key and Product ID as the sort key
 
     <details>
        <summary>Answer</summary>
 
-       D.
+       A:
+       - A: This is a suitable choice because it allows for partitioning by Product ID and sorting by Product Rating. Using this index, one can efficiently query for the top 10 ratings for a given product.
+       - B: This index allows for partitioning by Product ID, but sorting by Review ID doesn't help in fetching top ratings efficiently.
+       - C: LSIs require the same partition key as the base table, which in this case is Review ID. Therefore, this option is not valid.
+       - D: This doesn't help efficiently in fetching top ratings for a given product since the sort key is Product ID and not Product Rating.
 
     </details>
 
-40. A company is providing read access to objects in an Amazon S3 bucket for different customers. The company uses IAM permissions to restrict access to the S3 bucket. The customers can access only their own files. Due to a regulation requirement, the company needs to enforce encryption in transit for interactions with Amazon S3. Which solution will meet these requirements?
-    - [ ] A. Add a bucket policy to the S3 bucket to deny S3 actions when the aws:SecureTransport condition is equal to false.
-    - [ ] B. Add a bucket policy to the S3 bucket to deny S3 actions when the s3:x-amz-acl condition is equal to public-read.
-    - [ ] C. Add an IAM policy to the IAM users to enforce the usage of the AWS SDK.
-    - [ ] D. Add an IAM policy to the IAM users that allows S3 actions when the s3:x-amz-acl condition is equal to bucket-owner-read.
+50. A company needs to distribute firmware updates to its customers around the world. Which service will allow easy and secure control of the access to the downloads at the lowest cost?
+    - [ ] A. Use Amazon CloudFront with signed URLs for Amazon S3
+    - [ ] B. Create a dedicated Amazon CloudFront Distribution for each customer
+    - [ ] C. Use Amazon CloudFront with AWS Lambda@Edge
+    - [ ] D. Use Amazon API Gateway and AWS Lambda to control access to an S3 bucket
 
     <details>
        <summary>Answer</summary>
 
        A.
-       - A. This option adds a bucket policy to deny S3 actions when requests are not made over HTTPS (when aws:SecureTransport is false). This ensures that data is encrypted in transit. This is the correct option.
-       - B. The s3:x-amz-acl condition key is related to S3 object ACLs (Access Control Lists) and has nothing to do with enforcing encryption in transit. The value public-read would grant public read access to the object, which isn't relevant to the requirement.
-       - C. Simply enforcing the usage of the AWS SDK doesn't guarantee encryption in transit. Users can use the SDK to make both HTTP and HTTPS requests.
-       - D. Like option B, the s3:x-amz-acl condition key pertains to S3 object ACLs. The value bucket-owner-read grants the bucket owner read access to the object, which is not related to enforcing encryption in transit.
 
     </details>
 
-41. A company has an image storage web application that runs on AWS. The company hosts the application on Amazon EC2 instances in an Auto Scaling group. The Auto Scaling group acts as the target group for an Application Load Balancer (ALB) and uses an Amazon S3 bucket to store the images for sale. The company wants to develop a feature to test system requests. The feature will direct requests to a separate target group that hosts a new beta version of the application. Which solution will meet this requirement with the LEAST effort?
-    - [ ] A. Create a new Auto Scaling group and target group for the beta version of the application. Update the ALB routing rule with a condition that looks for a cookie named version that has a value of beta. Update the test system code to use this cookie to test the beta version of the application.
-    - [ ] B. Create a new ALB, Auto Scaling group, and target group for the beta version of the application. Configure an alternate Amazon Route 53 record for the new ALB endpoint. Use the alternate Route 53 endpoint in the test system requests to test the beta version of the application.
-    - [ ] C. Create a new ALB, Auto Scaling group, and target group for the beta version of the application. Use Amazon CloudFront with Lambda@Edge to determine which specific request will go to the new ALB. Use the CloudFront endpoint to send the test system requests to test the beta version of the application.
-    - [ ] D. Create a new Auto Scaling group and target group for the beta version of the application. Update the ALB routing rule with a condition that looks for a cookie named version that has a value of beta. Use Amazon CloudFront with Lambda@Edge to update the test system requests to add the required cookie when the requests go to the ALB.
-
-    <details>
-       <summary>Answer</summary>
-
-       A.
-       - A. This option involves adding a new target group and Auto Scaling group for the beta version. Requests carrying a cookie named "version" with a value "beta" are routed to the new beta version. This option does not involve any DNS changes and provides a simple mechanism to direct traffic to the beta version based on the presence of a cookie. It requires minimal effort and doesn't necessitate external systems for traffic routing.
-       - B. This option involves creating a completely separate infrastructure (a new ALB, Auto Scaling group, and target group) for the beta version. While it might work, it's more effort than simply adding a routing condition in the existing ALB.
-       - C. This option uses Lambda@Edge to decide where to send the traffic. While Lambda@Edge can be used to manipulate request and response headers, it's an additional layer of complexity, requiring you to manage CloudFront and Lambda configurations.
-       - D. This option combines both the ALB and CloudFront with Lambda@Edge, making it more complex than Option A. It's using Lambda@Edge to set the cookie, and then ALB to route based on that cookie. It's essentially a more convoluted version of Option A.
-
-    </details>
-
-42. A team is developing an application that is deployed on Amazon EC2 instances. During testing, the team receives an error. The EC2 instances are unable to access an Amazon S3 bucket. Which steps should the team take to troubleshoot this issue? (Choose two.)
-    - [ ] A. Check whether the policy that is assigned to the IAM role that is attached to the EC2 instances grants access to Amazon S3.
-    - [ ] B. Check the S3 bucket policy to validate the access permissions for the S3 bucket.
-    - [ ] C. Check whether the policy that is assigned to the IAM user that is attached to the EC2 instances grants access to Amazon S3.
-    - [ ] D. Check the S3 Lifecycle policy to validate the permissions that are assigned to the S3 bucket.
-    - [ ] E. Check the security groups that are assigned to the EC2 instances. Make sure that a rule is not blocking the access to Amazon S3.
-
-    <details>
-       <summary>Answer</summary>
-
-       AB.
-
-    </details>
-
-43. A developer is working on an ecommerce website. The developer wants to review server logs without logging in to each of the application servers individually. The website runs on multiple Amazon EC2 instances, is written in Python, and needs to be highly available. How can the developer update the application to meet these requirements with MINIMUM changes?
-    - [ ] A. Rewrite the application to be cloud native and to run on AWS Lambda, where the logs can be reviewed in Amazon CloudWatch.
-    - [ ] B. Set up centralized logging by using Amazon OpenSearch Service, Logstash, and OpenSearch Dashboards.
-    - [ ] C. Scale down the application to one larger EC2 instance where only one instance is recording logs.
-    - [ ] D. Install the unified Amazon CloudWatch agent on the EC2 instances. Configure the agent to push the application logs to CloudWatch.
-
-    <details>
-       <summary>Answer</summary>
-
-       D.
-
-    </details>
-
-44. A company is creating an application that processes .csv files from Amazon S3. A developer has created an S3 bucket. The developer has also created an AWS Lambda function to process the .csv files from the S3 bucket. Which combination of steps will invoke the Lambda function when a .csv file is uploaded to Amazon S3? (Choose two.)
-    - [ ] A. Create an Amazon EventBridge rule. Configure the rule with a pattern to match the S3 object created event.
-    - [ ] B. Schedule an Amazon EventBridge rule to run a new Lambda function to scan the S3 bucket.
-    - [ ] C. Add a trigger to the existing Lambda function. Set the trigger type to EventBridge. Select the Amazon EventBridge rule.
-    - [ ] D. Create a new Lambda function to scan the S3 bucket for recently added S3 objects.
-    - [ ] E. Add S3 Lifecycle rules to invoke the existing Lambda function.
-
-    <details>
-       <summary>Answer</summary>
-
-       AC.
-
-    </details>
-
-45. A developer needs to build an AWS CloudFormation template that self-populates the AWS Region variable that deploys the CloudFormation template. What is the MOST operationally efficient way to determine the Region in which the template is being deployed?
-    - [ ] A. Use the AWS::Region pseudo parameter.
-    - [ ] B. Require the Region as a CloudFormation parameter.
-    - [ ] C. Find the Region from the AWS::StackId pseudo parameter by using the Fn::Split intrinsic function.
-    - [ ] D. Dynamically import the Region by referencing the relevant parameter in AWS Systems Manager Parameter Store.
-    <details>
-       <summary>Answer</summary>
-
-       A.
-       `AWS::Region` pseudo parameter directly gives you the AWS region where the stack is being created. It's straightforward and doesn't require any additional work or functions.
-
-    </details>
-
-46. A company has hundreds of AWS Lambda functions that the company's QA team needs to test by using the Lambda function URLs. A developer needs to configure the authentication of the Lambda functions to allow access so that the QA IAM group can invoke the Lambda functions by using the public URLs. Which solution will meet these requirements?
-    - [ ] A. Create a CLI script that loops on the Lambda functions to add a Lambda function URL with the AWS_IAM auth type. Run another script to create an IAM identity-based policy that allows the lambda:InvokeFunctionUrl action to all the Lambda function Amazon Resource Names (ARNs). Attach the policy to the QA IAM group.
-    - [ ] B. Create a CLI script that loops on the Lambda functions to add a Lambda function URL with the NONE auth type. Run another script to create an IAM resource-based policy that allows the lambda:InvokeFunctionUrl action to all the Lambda function Amazon Resource Names (ARNs). Attach the policy to the QA IAM group.
-    - [ ] C. Create a CLI script that loops on the Lambda functions to add a Lambda function URL with the AWS_IAM auth type. Run another script to loop on the Lambda functions to create an IAM identity-based policy that allows the lambda:InvokeFunctionUrl action from the QA IAM group's Amazon Resource Name (ARN).
-    - [ ] D. Create a CLI script that loops on the Lambda functions to add a Lambda function URL with the NONE auth type. Run another script to loop on the Lambda functions to create an IAM resource-based policy that allows the lambda:InvokeFunctionUrl action from the QA IAM group's Amazon Resource Name (ARN).
-
-    <details>
-       <summary>Answer</summary>
-
-       C.
-
-    </details>
-
-47. A developer maintains a critical business application that uses Amazon DynamoDB as the primary data store. The DynamoDB table contains millions of documents and receives 30-60 requests each minute. The developer needs to perform processing in near-real time on the documents when they are added or updated in the DynamoDB table. How can the developer implement this feature with the LEAST amount of change to the existing application code?
-    - [ ] A. Set up a cron job on an Amazon EC2 instance. Run a script every hour to query the table for changes and process the documents.
-    - [ ] B. Enable a DynamoDB stream on the table. Invoke an AWS Lambda function to process the documents.
-    - [ ] C. Update the application to send a PutEvents request to Amazon EventBridge. Create an EventBridge rule to invoke an AWS Lambda function to process the documents.
-    - [ ] D. Update the application to synchronously process the documents directly after the DynamoDB write.
+51. A developer is testing an application that invokes an AWS Lambda function asynchronously. During the testing phase, the Lambda function fails to process after two retries. How can the developer troubleshoot the failure?
+    - [ ] A. Configure AWS CloudTrail logging to investigate the invocation failures
+    - [ ] B. Configure Dead Letter Queues by sending events to Amazon SQS for investigation
+    - [ ] C. Configure Amazon Simple Workflow Service to process any direct unprocessed events
+    - [ ] D. Configure AWS Config to process any direct unprocessed events
 
     <details>
        <summary>Answer</summary>
@@ -707,115 +764,11 @@
 
     </details>
 
-48. A developer is writing an application for a company. The application will be deployed on Amazon EC2 and will use an Amazon RDS for Microsoft SQL Server database. The company's security team requires that database credentials are rotated at least weekly. How should the developer configure the database credentials for this application?
-    - [ ] A. Create a database user. Store the user name and password in an AWS Systems Manager Parameter Store secure string parameter. Enable rotation of the AWS Key Management Service (AWS KMS) key that is used to encrypt the parameter.
-    - [ ] B. Enable IAM authentication for the database. Create a database user for use with IAM authentication. Enable password rotation.
-    - [ ] C. Create a database user. Store the user name and password in an AWS Secrets Manager secret that has daily rotation enabled.
-    - [ ] D. Use the EC2 user data to create a database user. Provide the user name and password in environment variables to the application.
-
-    <details>
-       <summary>Answer</summary>
-
-       C.
-
-    </details>
-
-49. A real-time messaging application uses Amazon API Gateway WebSocket APIs with backend HTTP service. A developer needs to build a feature in the application to identify a client that keeps connecting to and disconnecting from the WebSocket connection. The developer also needs the ability to remove the client. Which combination of changes should the developer make to the application to meet these requirements? (Choose two.)
-    - [ ] A. Switch to HTTP APIs in the backend service.
-    - [ ] B. Switch to REST APIs in the backend service.
-    - [ ] C. Use the callback URL to disconnect the client from the backend service.
-    - [ ] D. Add code to track the client status in Amazon ElastiCache in the backend service.
-    - [ ] E. Implement $connect and $disconnect routes in the backend service.
-
-    <details>
-       <summary>Answer</summary>
-
-       DE:
-       - A. Switching to HTTP APIs wouldn't inherently help track WebSocket connections or disconnections. WebSocket is a separate protocol from HTTP.
-       - B. Switching to REST APIs wouldn't help either. WebSocket provides a full-duplex communication channel, unlike REST APIs, which is necessary for real-time messaging applications.
-       - C. The callback URL mechanism is not a standard way to disconnect a client from a WebSocket. WebSocket APIs have built-in $disconnect for this purpose.
-       - D. While you can use Amazon ElastiCache (or other databases) to track client status, including connections and disconnections, by saving and updating the client status each time they connect or disconnect, it would be more about keeping track of state rather than the actual mechanism to connect/disconnect.
-       - E. Implementing $connect and $disconnect routes in the backend service allows you to execute custom logic each time a client connects or disconnects. This can be used to track which clients are connecting and disconnecting and is a standard feature for WebSocket APIs in API Gateway.
-
-    </details>
-
-50. A developer has written code for an application and wants to share it with other developers on the team to receive feedback. The shared application code needs to be stored long-term with multiple versions and batch change tracking. Which AWS service should the developer use?
-    - [ ] A. AWS CodeBuild
-    - [ ] B. Amazon S3
-    - [ ] C. AWS CodeCommit
-    - [ ] D. AWS Cloud9
-
-    <details>
-       <summary>Answer</summary>
-
-       C.
-
-    </details>
-
-51. A company's developer is building a static website to be deployed in Amazon S3 for a production environment. The website integrates with an Amazon Aurora PostgreSQL database by using an AWS Lambda function. The website that is deployed to production will use a Lambda alias that points to a specific version of the Lambda function. The company must rotate the database credentials every 2 weeks. Lambda functions that the company deployed previously must be able to use the most recent credentials. Which solution will meet these requirements?
-    - [ ] A. Store the database credentials in AWS Secrets Manager. Turn on rotation. Write code in the Lambda function to retrieve the credentials from Secrets Manager.
-    - [ ] B. Include the database credentials as part of the Lambda function code. Update the credentials periodically and deploy the new Lambda function.
-    - [ ] C. Use Lambda environment variables. Update the environment variables when new credentials are available.
-    - [ ] D. Store the database credentials in AWS Systems Manager Parameter Store. Turn on rotation. Write code in the Lambda function to retrieve the credentials from Systems Manager Parameter Store
-
-    <details>
-       <summary>Answer</summary>
-
-       A.
-
-    </details>
-
-52. A developer is developing an application that uses signed requests (Signature Version 4) to call other AWS services. The developer has created a canonical request, has created the string to sign, and has calculated signing information. Which methods could the developer use to complete a signed request? (Choose two.)
-    - [ ] A. Add the signature to an HTTP header that is named Authorization.
-    - [ ] B. Add the signature to a session cookie.
-    - [ ] C. Add the signature to an HTTP header that is named Authentication.
-    - [ ] D. Add the signature to a query string parameter that is named X-Amz-Signature.
-    - [ ] E. Add the signature to an HTTP header that is named WWW-Authenticate.
-
-    <details>
-       <summary>Answer</summary>
-
-       AD.
-       - By adding it to the request's HTTP header. Specifically, the signature is included in the Authorization header.
-       - By adding it to the query string, especially for presigned URLs. When included in the query string, the signature is in the X-Amz-Signature parameter.
-
-    </details>
-
-53. A company must deploy all its Amazon RDS DB instances by using AWS CloudFormation templates as part of AWS CodePipeline continuous integration and continuous delivery (CI/CD) automation. The primary password for the DB instance must be automatically generated as part of the deployment process. Which solution will meet these requirements with the LEAST development effort?
-    - [ ] A. Create an AWS Lambda-backed CloudFormation custom resource. Write Lambda code that generates a secure string. Return the value of the secure string as a data field of the custom resource response object. Use the CloudFormation Fn::GetAtt intrinsic function to get the value of the secure string. Use the value to create the DB instance.
-    - [ ] B. Use the AWS CodeBuild action of CodePipeline to generate a secure string by using the following AWS CLI command: aws secretsmanager get-random-password. Pass the generated secure string as a CloudFormation parameter with the NoEcho attribute set to true. Use the parameter reference to create the DB instance.
-    - [ ] C. Create an AWS Lambda-backed CloudFormation custom resource. Write Lambda code that generates a secure string. Return the value of the secure string as a data field of the custom resource response object. Use the CloudFormation Fn::GetAtt intrinsic function to get a value of the secure string. Create secrets in AWS Secrets Manager. Use the secretsmanager dynamic reference to use the value stored in the secret to create the DB instance.
-    - [ ] D. Use the AWS::SecretsManager::Secret resource to generate a secure string. Store the secure string as a secret in AWS Secrets Manager. Use the secretsmanager dynamic reference to use the value stored in the secret to create the DB instance.
-
-    <details>
-       <summary>Answer</summary>
-
-       D.
-       - A. This option involves creating a Lambda-backed CloudFormation custom resource, writing Lambda code to generate a secure string, and then using the Fn::GetAtt function to retrieve the generated password. While this would work, it requires writing and managing Lambda code, which increases the development effort.
-       - B. This option involves using AWS CodeBuild to execute the AWS CLI command for generating a password. While this method might work, it's a bit more convoluted and requires handling the password in the pipeline's artifact, which is not as secure as other options.
-       - C. This option is similar to option A but has an additional step of creating secrets in AWS Secrets Manager. It involves unnecessary additional steps and hence is not the most efficient.
-       - D. This option leverages the AWS::SecretsManager::Secret CloudFormation resource to generate a secure string. It also uses the Secrets Manager dynamic reference in CloudFormation to directly fetch the generated secret (password) and use it for the RDS instance. This option avoids the need for custom Lambda code or managing the password outside of the secure context of Secrets Manager.
-
-    </details>
-
-54. An organization is storing large files in Amazon S3, and is writing a web application to display meta-data about the files to end-users. Based on the metadata a user selects an object to download. The organization needs a mechanism to index the files and provide single-digit millisecond latency retrieval for the metadata. What AWS service should be used to accomplish this?
-    - [ ] A. Amazon DynamoDB
-    - [ ] B. Amazon EC2
-    - [ ] C. AWS Lambda
-    - [ ] D. Amazon RDS
-
-    <details>
-       <summary>Answer</summary>
-
-       A.
-
-    </details>
-
-55. A developer is creating an AWS Serverless Application Model (AWS SAM) template. The AWS SAM template contains the definition of multiple AWS Lambda functions, an Amazon S3 bucket, and an Amazon CloudFront distribution. One of the Lambda functions runs on Lambda@Edge in the CloudFront distribution. The S3 bucket is configured as an origin for the CloudFront distribution. When the developer deploys the AWS SAM template in the eu-west-1 Region, the creation of the stack fails. Which of the following could be the reason for this issue?
-    - [ ] A. CloudFront distributions can be created only in the us-east-1 Region.
-    - [ ] B. Lambda@Edge functions can be created only in the us-east-1 Region.
-    - [ ] C. A single AWS SAM template cannot contain multiple Lambda functions.
-    - [ ] D. The CloudFront distribution and the S3 bucket cannot be created in the same Region.
+52. A company is migrating its PostgreSQL database into the AWS Cloud. The company wants to use a database that will secure and regularly rotate database credentials. The company wants a solution that does not require additional programming overhead. Which solution will meet these requirements?
+    - [ ] A. Use Amazon Aurora PostgreSQL for the database. Store the database credentials in AWS Systems Manager Parameter Store. Turn on rotation.
+    - [ ] B. Use Amazon Aurora PostgreSQL for the database. Store the database credentials in AWS Secrets Manager. Turn on rotation.
+    - [ ] C. Use Amazon DynamoDB for the database. Store the database credentials in AWS Systems Manager Parameter Store. Turn on rotation.
+    - [ ] D. Use Amazon DynamoDB for the database. Store the database credentials in AWS Secrets Manager. Turn on rotation.
 
     <details>
        <summary>Answer</summary>
@@ -824,11 +777,11 @@
 
     </details>
 
-56. A developer is integrating Amazon ElastiCache in an application. The cache will store data from a database. The cached data must populate real-time dashboards. Which caching strategy will meet these requirements?
-    - [ ] A. A read-through cache
-    - [ ] B. A write-behind cache
-    - [ ] C. A lazy-loading cache
-    - [ ] D. A write-through cache
+53. A developer is creating a mobile application that will not require users to log in. What is the MOST efficient method to grant users access to AWS resources?
+    - [ ] A. Use an identity provider to securely authenticate with the application.
+    - [ ] B. Create an AWS Lambda function to create an IAM user when a user accesses the application.
+    - [ ] C. Create credentials using AWS KMS and apply these credentials to users when using the application.
+    - [ ] D. Use Amazon Cognito to associate unauthenticated users with an IAM role that has limited access to resources.
 
     <details>
        <summary>Answer</summary>
@@ -837,71 +790,11 @@
 
     </details>
 
-57. A developer is creating an AWS Lambda function. The Lambda function needs an external library to connect to a third-party solution. The external library is a collection of files with a total size of 100 MB. The developer needs to make the external library available to the Lambda execution environment and reduce the Lambda package space. Which solution will meet these requirements with the LEAST operational overhead?
-    - [ ] A. Create a Lambda layer to store the external library. Configure the Lambda function to use the layer.
-    - [ ] B. Create an Amazon S3 bucket. Upload the external library into the S3 bucket. Mount the S3 bucket folder in the Lambda function. Import the library by using the proper folder in the mount point.
-    - [ ] C. Load the external library to the Lambda function's /tmp directory during deployment of the Lambda package. Import the library from the /tmp directory.
-    - [ ] D. Create an Amazon Elastic File System (Amazon EFS) volume. Upload the external library to the EFS volume. Mount the EFS volume in the Lambda function. Import the library by using the proper folder in the mount point.
-
-    <details>
-       <summary>Answer</summary>
-
-       A.
-
-    </details>
-
-58. A company has a front-end application that runs on four Amazon EC2 instances behind an Elastic Load Balancer (ELB) in a production environment that is provisioned by AWS Elastic Beanstalk. A developer needs to deploy and test new application code while updating the Elastic Beanstalk platform from the current version to a newer version of Node.js. The solution must result in zero downtime for the application. Which solution meets these requirements?
-    - [ ] A. Clone the production environment to a different platform version. Deploy the new application code, and test it. Swap the environment URLs upon verification.
-    - [ ] B. Deploy the new application code in an all-at-once deployment to the existing EC2 instances. Test the code. Redeploy the previous code if verification fails.
-    - [ ] C. Perform an immutable update to deploy the new application code to new EC2 instances. Serve traffic to the new instances after they pass health checks.
-    - [ ] D. Use a rolling deployment for the new application code. Apply the code to a subset of EC2 instances until the tests pass. Redeploy the previous code if the tests fail.
-
-    <details>
-       <summary>Answer</summary>
-
-       A.
-       - A. Cloning the production environment creates a separate environment with identical settings. When the new application code is deployed and tested on the cloned environment, the developer can safely swap the environment URLs. This ensures zero downtime because the old environment can keep serving requests until the new environment is ready. Once verified, the URLs are swapped, directing traffic to the new environment.
-       - B. An all-at-once deployment updates all instances simultaneously. If there's an issue with the new code, it could cause downtime until the previous version is redeployed.
-       - C. An immutable update starts a new set of instances with the updated code/platform. Only when these instances are healthy, traffic is routed to them. This ensures zero downtime, but it might take longer as an entirely new environment is provisioned. However, this option doesn't discuss the update to the Node.js platform version.
-       - D. A rolling deployment updates a subset of instances, and if the tests pass, it continues to update the rest. If the tests fail, it implies that a subset of instances is already running potentially problematic code, which might lead to downtime.
-
-    </details>
-
-59. A developer is creating an AWS Lambda function. The Lambda function will consume messages from an Amazon Simple Queue Service (Amazon SQS) queue. The developer wants to integrate unit testing as part of the function's continuous integration and continuous delivery (CI/CD) process. How can the developer unit test the function?
-    - [ ] A. Create an AWS CloudFormation template that creates an SQS queue and deploys the Lambda function. Create a stack from the template during the CI/CD process. Invoke the deployed function. Verify the output.
-    - [ ] B. Create an SQS event for tests. Use a test that consumes messages from the SQS queue during the function's Cl/CD process.
-    - [ ] C. Create an SQS queue for tests. Use this SQS queue in the application's unit test. Run the unit tests during the CI/CD process.
-    - [ ] D. Use the aws lambda invoke command with a test event during the CI/CD process.
-
-    <details>
-       <summary>Answer</summary>
-
-       D.
-       - A. This approach tests the actual deployment of the Lambda and SQS, which is more suitable for an integration test, not a unit test.
-       - B. Creating an SQS event for tests seems like a better fit for integration testing, as it depends on the real SQS service to function.
-       - C. Creating an SQS queue and running the application's unit tests against it again is more of an integration testing approach.
-       - D. Using the aws lambda invoke command with a test event during the CI/CD process is more oriented towards testing the Lambda function's logic in isolation (provided the test event mocks the expected SQS message). This is closest to unit testing, where the focus is on the function's logic rather than its integration with external services.
-
-    </details>
-
-60. A developer is working on a web application that uses Amazon DynamoDB as its data store. The application has two DynamoDB tables: one table that is named artists and one table that is named songs. The artists table has artistName as the partition key. The songs table has songName as the partition key and artistName as the sort key. The table usage patterns include the retrieval of multiple songs and artists in a single database operation from the webpage. The developer needs a way to retrieve this information with minimal network traffic and optimal application performance. Which solution will meet these requirements?
-    - [ ] A. Perform a BatchGetltem operation that returns items from the two tables. Use the list of songName/artistName keys for the songs table and the list of artistName key for the artists table.
-    - [ ] B. Create a local secondary index (LSI) on the songs table that uses artistName as the partition key. Perform a query operation for each artistName on the songs table that filters by the list of songName. Perform a query operation for each artistName on the artists table.
-    - [ ] C. Perform a BatchGetitem operation on the songs table that uses the songName/artistName keys. Perform a BatchGetltem operation on the artists table that uses artistName as the key.
-    - [ ] D. Perform a Scan operation on each table that filters by the list of songName/artistName for the songs table and the list of artistName in the artists table.
-
-    <details>
-       <summary>Answer</summary>
-
-       A.
-
-    </details>
-
-61. A company is developing an ecommerce application that uses Amazon API Gateway APIs. The application uses AWS Lambda as a backend. The company needs to test the code in a dedicated, monitored test environment before the company releases the code to the production environment. Which solution will meet these requirements?
-    - [ ] A. Use a single stage in API Gateway. Create a Lambda function for each environment. Configure API clients to send a query parameter that indicates the environment and the specific Lambda function.
-    - [ ] B. Use multiple stages in API Gateway. Create a single Lambda function for all environments. Add different code blocks for different environments in the Lambda function based on Lambda environment variables.
-    - [ ] C. Use multiple stages in API Gateway. Create a Lambda function for each environment. Configure API Gateway stage variables to route traffic to the Lambda function in different environments.
-    - [ ] D. Use a single stage in API Gateway. Configure API clients to send a query parameter that indicates the environment. Add different code blocks for different environments in the Lambda function to match the value of the query parameter.
+54. A company has developed a new serverless application using AWS Lambda functions that will be deployed using the AWS Serverless Application Model (AWS SAM) CLI. Which step should the developer complete prior to deploying the application?
+    - [ ] A. Compress the application to a .zip file and upload it into AWS Lambda
+    - [ ] B. Test the new AWS Lambda function by first tracing it in AWS X-Ray
+    - [ ] C. Bundle the serverless application using a SAM package
+    - [ ] D. Create the application environment using the eb create my-env command
 
     <details>
        <summary>Answer</summary>
@@ -910,67 +803,25 @@
 
     </details>
 
-62. A developer creates an AWS Lambda function that retrieves and groups data from several public API endpoints. The Lambda function has been updated and configured to connect to the private subnet of a VPC. An internet gateway is attached to the VPC. The VPC uses the default network ACL and security group configurations. The developer finds that the Lambda function can no longer access the public API. The developer has ensured that the public API is accessible, but the Lambda function cannot connect to the API. How should the developer fix the connection issue?
-    - [ ] A. Ensure that the network ACL allows outbound traffic to the public internet.
-    - [ ] B. Ensure that the security group allows outbound traffic to the public internet.
-    - [ ] C. Ensure that outbound traffic from the private subnet is routed to a public NAT gateway.
-    - [ ] D. Ensure that outbound traffic from the private subnet is routed to a new internet gateway.
-
-    <details>
-       <summary>Answer</summary>
-
-       C.
-
-    </details>
-
-63. A developer needs to store configuration variables for an application. The developer needs to set an expiration date and time for the configuration. The developer wants to receive notifications before the configuration expires. Which solution will meet these requirements with the LEAST operational overhead?
-    - [ ] A. Create a standard parameter in AWS Systems Manager Parameter Store. Set Expiration and ExpirationNotification policy types.
-    - [ ] B. Create a standard parameter in AWS Systems Manager Parameter Store. Create an AWS Lambda function to expire the configuration and to send Amazon Simple Notification Service (Amazon SNS) notifications.
-    - [ ] C. Create an advanced parameter in AWS Systems Manager Parameter Store. Set Expiration and ExpirationNotification policy types.
-    - [ ] D. Create an advanced parameter in AWS Systems Manager Parameter Store. Create an Amazon EC2 instance with a cron job to expire the configuration and to send notifications.
-
-    <details>
-       <summary>Answer</summary>
-
-       C.
-
-    </details>
-
-64. A company is developing a serverless application that consists of various AWS Lambda functions behind Amazon API Gateway APIs. A developer needs to automate the deployment of Lambda function code. The developer will deploy updated Lambda functions with AWS CodeDeploy. The deployment must minimize the exposure of potential errors to end users. When the application is in production, the application cannot experience downtime outside the specified maintenance window. Which deployment configuration will meet these requirements with the LEAST deployment time?
-    - [ ] A. Use the AWS CodeDeploy in-place deployment configuration for the Lambda functions. Shift all traffic immediately after deployment.
-    - [ ] B. Use the AWS CodeDeploy linear deployment configuration to shift 10% of the traffic every minute.
-    - [ ] C. Use the AWS CodeDeploy all-at-once deployment configuration to shift all traffic to the updated versions immediately.
-    - [ ] D. Use the AWS CodeDeploy predefined canary deployment configuration to shift 10% of the traffic immediately and shift the remaining traffic after 5 minutes.
-
-    <details>
-       <summary>Answer</summary>
-
-       D.
-       - A. In-place deployment configuration for Lambda functions does not exist. Moreover, shifting all traffic immediately after deployment could expose all users to potential errors, which is not the desired behavior.
-       - B. Linear deployment configuration would shift 10% of the traffic every minute. While this approach is gradual, it may take longer to fully deploy the updated function, especially if there are issues detected during the rollout.
-       - C. All-at-once deployment would shift all traffic immediately. This option poses the highest risk of exposing all users to potential errors, and if there are any problems, they would impact all users at once.
-       - D. Canary deployment would shift 10% of the traffic immediately, allowing for a quick test of the new function version with a smaller subset of users. If no issues are detected, the remaining 90% of the traffic would be shifted after 5 minutes. This method combines both immediate validation and a rapid full rollout, resulting in the least deployment time while still reducing risk.
-
-    </details>
-
-65. A company created four AWS Lambda functions that connect to a relational database server that runs on an Amazon RDS instance. A security team requires the company to automatically change the database password every 30 days. Which solution will meet these requirements MOST securely?
-    - [ ] A. Store the database credentials in the environment variables of the Lambda function. Deploy the Lambda function with the new credentials every 30 days.
-    - [ ] B. Store the database credentials in AWS Secrets Manager. Configure a 30-day rotation schedule for the credentials.
-    - [ ] C. Store the database credentials in AWS Systems Manager Parameter Store secure strings. Configure a 30-day schedule for the secure strings.
-    - [ ] D. Store the database credentials in an Amaz
+55. A company wants to automate part of its deployment process. A developer needs to automate the process of checking for and deleting unused resources that supported previously deployed stacks but that are no longer used. The company has a central application that uses the AWS Cloud Development Kit (AWS CDK) to manage all deployment stacks. The stacks are spread out across multiple accounts. The developer’s solution must integrate as seamlessly as possible within the current deployment process. Which solution will meet these requirements with the LEAST amount of configuration?
+    - [ ] A. In the central AWS CDK application, write a handler function in the code that uses AWS SDK calls to check for and delete unused resources. Create an AWS CloudFormation template from a JSON file. Use the template to attach the function code to an AWS Lambda function and to invoke the Lambda function when the deployment stack runs.
+    - [ ] B. In the central AWS CDK application, write a handler function in the code that uses AWS SDK calls to check for and delete unused resources. Create an AWS CDK custom resource. Use the custom resource to attach the function code to an AWS Lambda function and to invoke the Lambda function when the deployment stack runs.
+    - [ ] C. In the central AWS CDK, write a handler function in the code that uses AWS SDK calls to check for and delete unused resources. Create an API in AWS Amplify. Use the API to attach the function code to an AWS Lambda function and to invoke the Lambda function when the deployment stack runs.
+    - [ ] D. In the AWS Lambda console, write a handler function in the code that uses AWS SDK calls to check for and delete unused resources. Create an AWS CDK custom resource. Use the custom resource to import the Lambda function into the stack and to invoke the Lambda function when the deployment stack runs.
 
     <details>
        <summary>Answer</summary>
 
        B.
+       The goal is to automate the process of checking for and deleting unused resources within the current deployment process managed by the AWS CDK (Cloud Development Kit). AWS CDK provides an integrated way to manage AWS resources. Custom resources in CDK allow you to run custom AWS Lambda functions as part of the AWS CloudFormation provisioning process.
 
     </details>
 
-66. A developer is setting up a deployment pipeline. The pipeline includes an AWS CodeBuild build stage that requires access to a database to run integration tests. The developer is using a buildspec.yml file to configure the database connection. Company policy requires automatic rotation of all database credentials. Which solution will handle the database credentials MOST securely?
-    - [ ] A. Retrieve the credentials from variables that are hardcoded in the buildspec.yml file. Configure an AWS Lambda function to rotate the credentials.
-    - [ ] B. Retrieve the credentials from an environment variable that is linked to a SecureString parameter in AWS Systems Manager Parameter Store. Configure Parameter Store for automatic rotation.
-    - [ ] C. Retrieve the credentials from an environment variable that is linked to an AWS Secrets Manager secret. Configure Secrets Manager for automatic rotation.
-    - [ ] D. Retrieve the credentials from an environment variable that contains the connection string in plaintext. Configure an Amazon EventBridge event to rotate the credentials.
+56. A company built a new application in the AWS Cloud. The company automated the bootstrapping of new resources with an Auto Scaling group by using AWS CloudFormation templates. The bootstrap scripts contain sensitive data. The company needs a solution that is integrated with CloudFormation to manage the sensitive data in the bootstrap scripts. Which solution will meet these requirements in the MOST secure way?
+    - [ ] A. Put the sensitive data into a CloudFormation parameter. Encrypt the CloudFormation templates by using an AWS Key Management Service (AWS KMS) key.
+    - [ ] B. Put the sensitive data into an Amazon S3 bucket. Update the CloudFormation templates to download the object from Amazon S3 during bootstrap.
+    - [ ] C. Put the sensitive data into AWS Systems Manager Parameter Store as a secure string parameter. Update the CloudFormation templates to use dynamic references to specify template values.
+    - [ ] D. Put the sensitive data into Amazon Elastic File System (Amazon EFS). Enforce EFS encryption after file system creation. Update the CloudFormation templates to retrieve data from Amazon EFS.
 
     <details>
        <summary>Answer</summary>
@@ -979,56 +830,212 @@
 
     </details>
 
-67. A company is developing a serverless multi-tier application on AWS. The company will build the serverless logic tier by using Amazon API Gateway and AWS Lambda. While the company builds the logic tier, a developer who works on the frontend of the application must develop integration tests. The tests must cover both positive and negative scenarios, depending on success and error HTTP status codes. Which solution will meet these requirements with the LEAST effort?
-    - [ ] A. Set up a mock integration for API methods in API Gateway. In the integration request from Method Execution, add simple logic to return either a success or error based on HTTP status code. In the integration response, add messages that correspond to the HTTP status codes.
-    - [ ] B. Create two mock integration resources for API methods in API Gateway. In the integration request, return a success HTTP status code for one resource and an error HTTP status code for the other resource. In the integration response, add messages that correspond to the HTTP status codes.
-    - [ ] C. Create Lambda functions to perform tests. Add simple logic to return either success or error, based on the HTTP status codes. Build an API Gateway Lambda integration. Select appropriate Lambda functions that correspond to the HTTP status codes.
-    - [ ] D. Create a Lambda function to perform tests. Add simple logic to return either success or error-based HTTP status codes. Create a mock integration in API Gateway. Select the Lambda function that corresponds to the HTTP status codes.
-
-    <details>
-       <summary>Answer</summary>
-
-       A.
-
-    </details>
-
-68. Users are reporting errors in an application. The application consists of several microservices that are deployed on Amazon Elastic Container Service (Amazon ECS) with AWS Fargate. Which combination of steps should a developer take to fix the errors? (Choose two.)
-    - [ ] A. Deploy AWS X-Ray as a sidecar container to the microservices. Update the task role policy to allow access to the X-Ray API.
-    - [ ] B. Deploy AWS X-Ray as a daemonset to the Fargate cluster. Update the service role policy to allow access to the X-Ray API.
-    - [ ] C. Instrument the application by using the AWS X-Ray SDK. Update the application to use the PutXrayTrace API call to communicate with the X-Ray API.
-    - [ ] D. Instrument the application by using the AWS X-Ray SDK. Update the application to communicate with the X-Ray daemon.
-    - [ ] E. Instrument the ECS task to send the stdout and stderr output to Amazon CloudWatch Logs. Update the task role policy to allow the cloudwatch:PullLogs action.
-
-    <details>
-       <summary>Answer</summary>
-
-       AD.
-       - A. AWS X-Ray can be deployed as a sidecar container alongside the application in ECS tasks. This approach enables the application to communicate with the X-Ray daemon over the local loopback interface.
-       - D. After you've deployed X-Ray as a sidecar, the application should be instrumented using the AWS X-Ray SDK. The SDK will send trace data to the X-Ray daemon, which then forwards it to the X-Ray service.
-
-    </details>
-
-69. A developer is creating an application for a company. The application needs to read the file doc.txt that is placed in the root folder of an Amazon S3 bucket that is named DOC-EXAMPLE-BUCKET. The company’s security team requires the principle of least privilege to be applied to the application’s IAM policy. Which IAM policy statement will meet these security requirements?
-
-    ![69](img/69.png)
-
-    <details>
-       <summary>Answer</summary>
-
-       A.
-
-    </details>
-
-70. A company has an application that uses AWS CodePipeline to automate its continuous integration and continous delivery (CI/CD) workflow. The application uses AWS CodeCommit for version control. A developer who was working on one of the tasks did not pull the most recent changes from the main branch. A week late, the developer noticed merge conflicts. How  can the developer resolve the merge conflicts in the developer's branch woith the LEAST development effort?
-    - [ ] A. Clone the repository. Create a new branch. Update the branch with the changes.
-    - [ ] B. Create a new branch. Apply the changes from the previous branch.
-    - [ ] C. Use the Commit Visualizer view to compare the commit when a feature was added. Fiz the merge conflicts.
-    - [ ] D. Stop the pull from the main branch to the feature branch. Rebase the feature branch from the main branch.
+57. A company needs to set up secure database credentials for all its AWS Cloud resources. The company’s resources include Amazon RDS DB instances, Amazon DocumentDB clusters, and Amazon Aurora DB instances. The company’s security policy mandates that database credentials be encrypted at rest and rotated at a regular interval. Which solution will meet these requirements MOST securely?
+    - [ ] A. Set up IAM database authentication for token-based access. Generate user tokens to provide centralized access to RDS DB instances, Amazon DocumentDB clusters, and Aurora DB instances.
+    - [ ] B. Create parameters for the database credentials in AWS Systems Manager Parameter Store. Set the Type parameter to SecureString. Set up automatic rotation on the parameters.
+    - [ ] C. Store the database access credentials as an encrypted Amazon S3 object in an S3 bucket. Block all public access on the S3 bucket. Use S3 server-side encryption to set up automatic rotation on the encryption key.
+    - [ ] D. Create an AWS Lambda function by using the SecretsManagerRotationTemplate template in the AWS Secrets Manager console. Create secrets for the database credentials in Secrets Manager. Set up secrets rotation on a schedule.
 
     <details>
        <summary>Answer</summary>
 
        D.
-       This option suggests stopping the pull (which is usually where you'd see the merge conflict), then rebasing the feature branch onto the main branch. This is the best approach as it will take the changes in the main branch and replay the changes in the feature branch on top of them. If there are conflicts during this process, they can be resolved one by one. After this, the feature branch can be cleanly merged into the main branch.
+
+    </details>
+
+58. A developer has created an AWS Lambda function that makes queries to an Amazon Aurora MySQL DB instance. When the developer performs a test, the DB instance shows an error for too many connections. Which solution will meet these requirements with the LEAST operational effort?
+    - [ ] A. Create a read replica for the DB instance. Query the replica DB instance instead of the primary DB instance.
+    - [ ] B. Migrate the data to an Amazon DynamoDB database.
+    - [ ] C. Configure the Amazon Aurora MySQL DB instance for Multi-AZ deployment.
+    - [ ] D. Create a proxy in Amazon RDS Proxy. Query the proxy instead of the DB instance.
+
+    <details>
+       <summary>Answer</summary>
+
+       D.
+
+    </details>
+
+59. A developer is creating a new REST API by using Amazon API Gateway and AWS Lambda. The development team tests the API and validates responses for the known use cases before deploying the API to the production environment. The developer wants to make the REST API available for testing by using API Gateway locally. Which AWS Serverless Application Model Command Line Interface (AWS SAM CLI) subcommand will meet these requirements?
+    - [ ] A. Sam local invoke
+    - [ ] B. Sam local generate-event
+    - [ ] C. Sam local start-lambda
+    - [ ] D. Sam local start-api
+
+    <details>
+       <summary>Answer</summary>
+
+       D.
+       Using sam local start-api, you can make HTTP requests to your serverless application running locally as if it were deployed on AWS with API Gateway and Lambda.
+    </details>
+
+60. A company has a serverless application on AWS that uses a fleet of AWS Lambda functions that have aliases. The company regularly publishes new Lambda function by using an in-house deployment solution. The company wants to improve the release process and to use traffic shifting. A newly published function version should initially make available only to a fixed percentage of production users. Which solution will meet these requirements?
+    - [ ] A. Configure routing on the alias of the new function by using a weighted alias.
+    - [ ] B. Configure a canary deployment type for Lambda.
+    - [ ] C. Configure routing on the new versions by using environment variables.
+    - [ ] D. Configure a linear deployment type for Lambda.
+
+    <details>
+       <summary>Answer</summary>
+
+       A.
+       - A: This is the correct choice. With Lambda weighted aliases, you can route a certain percentage of traffic to one version of a Lambda function and the rest to another version. Over time, you can adjust these weights to shift more traffic to the new version.
+       - B: While AWS Lambda supports canary deployments with AWS SAM and AWS CodeDeploy, this type of deployment deploys the new version to a small percentage of users for a limited time before full deployment. This doesn't match the scenario described where a fixed percentage gets the new version indefinitely.
+       - C: Environment variables in Lambda are used for configuration settings, not for routing traffic between function versions.
+       - D: Similar to canary deployments, linear deployments gradually shift traffic over time, but they don't hold a fixed percentage for the new version indefinitely.
+
+    </details>
+
+61. A company has an application that stores data in Amazon RDS instances. The application periodically experiences surges of high traffic that cause performance problems. During periods of peak traffic, a developer notices a reduction in query speed in all database queries. The team’s technical lead determines that a multi-threaded and scalable caching solution should be used to offload the heavy read traffic. The solution needs to improve performance. Which solution will meet these requirements with the LEAST complexity?
+    - [ ] A. Use Amazon ElastiCache for Memcached to offload read requests from the main database.
+    - [ ] B. Replicate the data to Amazon DynamoDSet up a DynamoDB Accelerator (DAX) cluster.
+    - [ ] C. Configure the Amazon RDS instances to use Multi-AZ deployment with one standby instance. Offload read requests from the main database to the standby instance.
+    - [ ] D. Use Amazon ElastiCache for Redis to offload read requests from the main database.
+
+    <details>
+       <summary>Answer</summary>
+
+       A.
+       - A: Memcached is a popular in-memory key-value store that can be used to cache frequently accessed data. This option is a straightforward way to add a caching layer in front of the RDS instance to improve read performance.
+       - B: This option involves replicating data from RDS to DynamoDB and then setting up DAX. This is a much more complex solution as it requires data synchronization between two different types of databases (RDS and DynamoDB) and introduces added complexity of managing DAX.
+       - C: While Multi-AZ deployment provides high availability by replicating data to a standby instance in another availability zone, the standby cannot be used to serve read requests. It's only for failover purposes.
+       - D:Redis is another in-memory key-value store, similar to Memcached. Redis supports more complex data types compared to Memcached and offers persistence, but for a simple caching requirement, both are viable options.
+
+    </details>
+
+62. A developer must provide an API key to an AWS Lambda function to authenticate with a third-party system. The Lambda function will run on a schedule. The developer needs to ensure that the API key remains encrypted at rest. Which solution will meet these requirements?
+    - [ ] A. Store the API key as a Lambda environment variable by using an AWS Key Management Service (AWS KMS) customer managed key.
+    - [ ] B. Configure the application to prompt the user to provide the password to the Lambda function on the first run.
+    - [ ] C. Store the API key as a value in the application code.
+    - [ ] D. Use Lambda@Edge and only communicate over the HTTPS protocol.
+
+    <details>
+       <summary>Answer</summary>
+
+       A.
+
+    </details>
+
+63. An IT department uses Amazon S3 to store sensitive images. After more than 1 year, the company moves the images into archival storage. The company rarely accesses the images, but the company wants a storage solution that maximizes resiliency. The IT department needs access to the images that have been moved to archival storage within 24 hours. Which solution will meet these requirements MOST cost-effectively?
+    - [ ] A. Use S3 Standard-Infrequent Access (S3 Standard-IA) to store the images. Use S3 Glacier Deep Archive with standard retrieval to store and retrieve archived images.
+    - [ ] B. Use S3 Standard-Infrequent Access (S3 Standard-IA) to store the images. Use S3 Glacier Deep Archive with bulk retrieval to store and retrieve archived images.
+    - [ ] C. Use S3 Intelligent-Tiering to store the images. Use S3 Glacier Deep Archive with standard retrieval to store and retrieve archived images.
+    - [ ] D. Use S3 One Zone-Infrequent Access (S3 One Zone-IA) to store the images. Use S3 Glacier Deep Archive with bulk retrieval to store and retrieve archived images.
+
+    <details>
+       <summary>Answer</summary>
+
+       A.
+
+    </details>
+
+64. A developer is building a serverless application by using the AWS Serverless Application Model (AWS SAM). The developer is currently testing the application in a development environment. When the application is nearly finished, the developer will need to set up additional testing and staging environments for a quality assurance team. The developer wants to use a feature of the AWS SAM to set up deployments to multiple environments. Which solution will meet these requirements with the LEAST development effort?
+    - [ ] A. Add a configuration file in TOML format to group configuration entries to every environment. Add a table for each testing and staging environment. Deploy updates to the environments by using the SAM deploy command and the --config-env flag that corresponds to each environment.
+    - [ ] B. Create additional AWS SAM templates for each testing and staging environment. Write a custom shell script that uses the SAM deploy command and the --template-file flag to deploy updates to the environments.
+    - [ ] C. Create one AWS SAM configuration file that has default parameters. Perform updates to the testing and staging environments by using the --parameter-overrides flag in the AWS SAM CLI and the parameters that the updates will override.
+    - [ ] D. Use the existing AWS SAM template. Add additional parameters to configure specific attributes for the serverless function and database table resources that are in each environment. Deploy updates to the testing and staging environments by using the SAM deploy command.
+
+    <details>
+       <summary>Answer</summary>
+
+       A.
+       - A: This approach allows you to define environment-specific configurations in a structured format. Deploying to a specific environment can then be done using the SAM deploy `--config-env <env_name>` command. This approach consolidates the configuration for each environment in one place, making it easier to manage.
+       - B: This approach would mean maintaining multiple separate SAM templates for each environment. It would increase the complexity and effort required to maintain and deploy the application because any change in one environment's template would need to be replicated across all other environment templates.
+       - C: This approach requires manual intervention every time a deployment is made to provide the overridden parameters. It's not as streamlined as using a configuration file that groups entries for each environment.
+       - D: This approach is essentially the same as option C but doesn't specifically mention using the `--parameter-overrides flag`. It relies on manual intervention during deployments.
+
+    </details>
+
+65. A developer is working on an application that processes operating data from IoT devices. Each IoT device uploads a data file once every hour to an Amazon S3 bucket. The developer wants to immediately process each data file when the data file is uploaded to Amazon S3. The developer will use an AWS Lambda function to process the data files from Amazon S3. The Lambda function is configured with the S3 bucket information where the files are uploaded. The developer wants to configure the Lambda function to immediately invoke after each data file is uploaded. Which solution will meet these requirements?
+    - [ ] A. Add an asynchronous invocation to the Lambda function. Select the S3 bucket as the source.
+    - [ ] B. Add an Amazon EventBridge event to the Lambda function. Select the S3 bucket as the source.
+    - [ ] C. Add a trigger to the Lambda function. Select the S3 bucket as the source.
+    - [ ] D. Add a layer to the Lambda function. Select the S3 bucket as the source.
+
+    <details>
+       <summary>Answer</summary>
+
+       C.
+
+    </details>
+
+66. A developer is setting up infrastructure by using AWS CloudFormation. If an error occurs when the resources described in the Cloud Formation template are provisioned, successfully provisioned resources must be preserved. The developer must provision and update the CloudFormation stack by using the AWS CLI. Which solution will meet these requirements?
+    - [ ] A. Add an --enable-termination-protection command line option to the create-stack command and the update-stack command.
+    - [ ] B. Add a --disable-rollback command line option to the create-stack command and the update-stack command.
+    - [ ] C. Add a --parameters ParameterKey=PreserveResources,ParameterValue=True command line option to the create-stack command and the update-stack command.
+    - [ ] D. Add a --tags Key=PreserveResources,Value=True command line option to the create-stack command and the update-stack command.
+
+    <details>
+       <summary>Answer</summary>
+
+       B.
+       - A. --enable-termination-protection: This option prevents the CloudFormation stack from being accidentally deleted. It does not prevent rollback upon a provisioning failure.
+       - B. --disable-rollback: This option will disable rollback of the stack if stack creation fails. This is the correct option because if the stack creation fails, any resources that were created will be preserved instead of being rolled back and deleted.
+       - C. --parameters ParameterKey=PreserveResources,ParameterValue=True: This is not a standard parameter for the AWS CLI create-stack or update-stack commands for CloudFormation. CloudFormation parameters are used to pass values into your CloudFormation template at runtime, and there's no built-in "PreserveResources" parameter.
+       - D. --tags Key=PreserveResources,Value=True: Tags are metadata that you can assign to resources in the CloudFormation stack. They don't control the behavior of stack creation or updates.
+
+    </details>
+
+67. A developer is building a serverless application that connects to an Amazon Aurora PostgreSQL database. The serverless application consists of hundreds of AWS Lambda functions. During every Lambda function scale out, a new database connection is made that increases database resource consumption. The developer needs to decrease the number of connections made to the database. The solution must not impact the scalability of the Lambda functions. Which solution will meet these requirements?
+    - [ ] A. Configure provisioned concurrency for each Lambda function by setting the ProvisionedConcurrentExecutions parameter to 10.
+    - [ ] B. Enable cluster cache management for Aurora PostgreSQL. Change the connection string of each Lambda function to point to cluster cache management.
+    - [ ] C. Use Amazon RDS Proxy to create a connection pool to manage the database connections. Change the connection string of each Lambda function to reference the proxy.
+    - [ ] D. Configure reserved concurrency for each Lambda function by setting the ReservedConcurrentExecutions parameter to 10.
+
+    <details>
+       <summary>Answer</summary>
+
+       C.
+
+    </details>
+
+68. A developer is preparing to begin development of a new version of an application. The previous version of the application is deployed in a production environment. The developer needs to deploy fixes and updates to the current version during the development of the new version of the application. The code for the new version of the application is stored in AWS CodeCommit. Which solution will meet these requirements?
+    - [ ] A. From the main branch, create a feature branch for production bug fixes. Create a second feature branch from the main branch for development of the new version.
+    - [ ] B. Create a Git tag of the code that is currently deployed in production. Create a Git tag for the development of the new version. Push the two tags to the CodeCommit repository.
+    - [ ] C. From the main branch, create a branch of the code that is currently deployed in production. Apply an IAM policy that ensures no other users can push or merge to the branch.
+    - [ ] D. Create a new CodeCommit repository for development of the new version of the application. Create a Git tag for the development of the new version.
+
+    <details>
+       <summary>Answer</summary>
+
+       A.
+       - A. This approach is in line with standard Git practices. You have the main branch representing the production state. One feature branch can be used for hotfixes or bug fixes to the current version, and another feature branch can be used for the development of the new version. Fixes can be merged back to the main branch as needed, and development of the new version can proceed without affecting the main branch.
+       - B. Git tags are more like bookmarks or references to specific points in your Git history, often used for releases. They are not meant for ongoing development. Therefore, this isn't the best approach for the given scenario.
+       - C. While it's possible to create a branch from the main branch, applying an IAM policy that restricts pushes or merges can complicate the workflow, especially if collaboration is needed. This isn't the most straightforward approach.
+       - D. Creating a new CodeCommit repository might be overkill and can add unnecessary complications when trying to track changes or merge updates between the versions.
+
+    </details>
+
+69. A developer is creating an AWS CloudFormation stack. The stack contains IAM resources with custom names. When the developer tries to deploy the stack, they receive an InsufficientCapabilities error. What should the developer do to resolve this issue?
+    - [ ] A. Specify the CAPABILITY_AUTO_EXPAND capability in the CloudFormation stack.
+    - [ ] B. Use an administrators role to deploy IAM resources with CloudFormation.
+    - [ ] C. Specify the CAPABILITY_IAM capability in the CloudFormation stack.
+    - [ ] D. Specify the CAPABILITY_NAMED_IAM capability in the CloudFormation stack.
+
+    <details>
+       <summary>Answer</summary>
+
+       D.
+       - A. CAPABILITY_AUTO_EXPAND: This capability is needed if you are using certain CloudFormation macros that reference transforms.
+       - B. Using an administrator role: This does not directly relate to the InsufficientCapabilities error. Even if you have administrative permissions, you would still need to specify the necessary capabilities when deploying a stack that creates or modifies IAM resources.
+       - C. CAPABILITY_IAM: This capability allows CloudFormation to create and modify IAM resources without custom names.
+       - D. CAPABILITY_NAMED_IAM: This capability allows CloudFormation to create and modify IAM resources with custom names.
+
+    </details>
+
+70. A company uses Amazon API Gateway to expose a set of APIs to customers. The APIs have caching enabled in API Gateway. Customers need a way to invalidate the cache for each API when they test the API. What should a developer do to give customers the ability to invalidate the API cache?
+    - [ ] A. Ask the customers to use AWS credentials to call the InvalidateCache API operation.
+    - [ ] B. Attach an InvalidateCache policy to the IAM execution role that the customers use to invoke the API. Ask the customers to send a request that contains the Cache-Control:max-age=0 HTTP header when they make an API call.
+    - [ ] C. Ask the customers to use the AWS SDK API Gateway class to invoke the InvalidateCache API operation.
+    - [ ] D. Attach an InvalidateCache policy to the IAM execution role that the customers use to invoke the API. Ask the customers to add the INVALIDATE_CACHE query string parameter when they make an API call.
+
+    <details>
+       <summary>Answer</summary>
+
+       D.
+       - A. There's no direct InvalidateCache API operation for customers to call.
+       - B. While using the Cache-Control:max-age=0 HTTP header might sound like a way to control cache, it's not the direct method Amazon API Gateway provides for cache invalidation.
+       - C. There isn't an InvalidateCache operation in the AWS SDK API Gateway class.
+       - D. This choice accurately represents the recommended method. The IAM execution role must have the necessary permissions and customers should add the INVALIDATE_CACHE query string parameter to their API call to invalidate the cache.
 
     </details>
