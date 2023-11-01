@@ -66,6 +66,7 @@
       <summary>Answer</summary>
 
       A.
+      The most suitable solution would be to have the customer_type as the partition key because it's the main attribute on which the search is performed. The email addresses that match partially based on the input will be fetched using the begins_with key condition expression on the sort key, which is email_address.
 
    </details>
 
@@ -364,6 +365,7 @@
        <summary>Answer</summary>
 
        B.
+       The AWS Encryption SDK provides a set of tools for encrypting data in a manner that is compatible with AWS services. When using the AWS Encryption SDK, the developer doesn't handle the raw data encryption keys (DEKs) directly. Instead, after the data is encrypted with a DEK, the SDK encrypts the DEK itself with a customer master key (CMK). This encrypted DEK is then stored as part of the returned ciphertext. This process is known as envelope encryption.
 
     </details>
 
@@ -394,6 +396,7 @@
        <summary>Answer</summary>
 
        A.
+       When deploying code across multiple accounts, you want to ensure that the permissions given are the least privileged, while still allowing the necessary actions. Additionally, using a wildcard principal (*) in a bucket policy is not recommended because it's overly permissive and can lead to potential security risks.
 
     </details>
 
@@ -403,7 +406,7 @@
     - [ ] C. Use an AWS Lambda function that is invoked by an Amazon EventBridge (Amazon CloudWatch Events) scheduled event.
     - [ ] D. Use an AWS Batch job that is submitted to an AWS Batch job queue.
 
-       <summary>Answer</summary>
+    <summary>Answer</summary>
 
        C.
 
@@ -435,7 +438,7 @@
 
     </details>
 
-30. A developer at a company recently created a serverless application to process and show data from business reports. The application's user interface (UI) allows users to select and start processing the flies. The UI displays a message when the result is available to view. The application uses AWS Step Functions with AWS Lambda functions to process the files. The developer used Amazon API Gateway and Lambda functions to create an API to support the UI. The company's UI team reports that the request to process a file s often returning timeout errors because of the size or complexity of the files. The UI team wants the API to provide an immediate response so that the UI can display a message while the files are being processed. The backend process that is invoked by the API needs to send an email message when the report processing is complete. What should the developer do to configure the API to meet these requirements?
+30. A developer at a company recently created a serverless application to process and show data from business reports. The application's user interface (UI) allows users to select and start processing the flies. The UI displays a message when the result is available to view. The application uses AWS Step Functions with AWS Lambda functions to process the files. The developer used Amazon API Gateway and Lambda functions to create an API to support the UI. The company's UI team reports that the request to process a file is often returning timeout errors because of the size or complexity of the files. The UI team wants the API to provide an immediate response so that the UI can display a message while the files are being processed. The backend process that is invoked by the API needs to send an email message when the report processing is complete. What should the developer do to configure the API to meet these requirements?
     - [ ] A. Change the API Gateway route to add an X-Amz-Invocation-Type header with a static value of 'Event' in the integration request. Deploy the API Gateway stage to apply the changes.
     - [ ] B. Change the configuration of the Lambda function that implements the request to process a file. Configure the maximum age of the event so that the Lambda function will run asynchronously.
     - [ ] C. Change the API Gateway timeout value to match the Lambda function timeout value. Deploy the API Gateway stage to apply the changes.
@@ -542,7 +545,7 @@
     </details>
 
 36. When a Developer tries to run an AWS CodeBuild project, it raises an error because the length of all environment variables exceeds the limit for the combined maximum of characters. What is the recommended solution?
-    - [ ] A. Add the export LC_ALL=ג€en_US.utf8ג€ command to the pre_build section to ensure POSIX localization.
+    - [ ] A. Add the export LC_ALL=en_US.utf command to the pre_build section to ensure POSIX localization.
     - [ ] B. Use Amazon Cognito to store key-value pairs for large numbers of environment variables.
     - [ ] C. Update the settings for the build project to use an Amazon S3 bucket for large numbers of environment variables.
     - [ ] D. Use AWS Systems Manager Parameter Store to store large numbers of environment variables.
@@ -606,7 +609,7 @@
 
     </details>
 
-41. A developer is troubleshooting an Amazon API Gateway API. Clients are receiving HTTP 400 response errors when the clients try to access an endpoint of the API. How can the developer determine the cause of these errors?\
+41. A developer is troubleshooting an Amazon API Gateway API. Clients are receiving HTTP 400 response errors when the clients try to access an endpoint of the API. How can the developer determine the cause of these errors?
     - [ ] A. Create an Amazon Kinesis Data Firehose delivery stream to receive API call logs from API Gateway. Configure Amazon CloudWatch Logs as the delivery stream’s destination.
     - [ ] B. Turn on AWS CloudTrail Insights and create a trail. Specify the Amazon Resource Name (ARN) of the trail for the stage of the API.
     - [ ] C. Turn on AWS X-Ray for the API stage. Create an Amazon CloudWatch Logs log group. Specify the Amazon Resource Name (ARN) of the log group for the API stage.
@@ -616,6 +619,7 @@
        <summary>Answer</summary>
 
        D.
+       This option is correct because by turning on execution logging and access logging in CloudWatch Logs for the API stage, the developer will get logs related to each API request, which can help identify the cause of the HTTP 400 errors.This option is correct because by turning on execution logging and access logging in CloudWatch Logs for the API stage, the developer will get logs related to each API request, which can help identify the cause of the HTTP 400 errors.
 
     </details>
 
@@ -678,6 +682,7 @@
        <summary>Answer</summary>
 
        B.
+       This option is correct. By configuring the event source mapping for the Lambda function and specifying the DynamoDB Stream as the source, AWS Lambda will be triggered whenever there are updates in the table.
 
     </details>
 
