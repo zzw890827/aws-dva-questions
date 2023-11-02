@@ -268,6 +268,14 @@
        <summary>Answer</summary>
 
        A.
+       The developer's requirements can be summarized as follows:
+       1. Query details of a movie based on title and release year.
+       2. Query details of all movies with a particular title.
+       3. Query details of all movies in a particular genre.
+       Given these requirements, let's analyze the provided options:
+       - The primary key (title as partition key and release year as sort key) to serve the first requirement.
+       - The primary partition key itself to serve the second requirement since all items with the same partition key can be retrieved together.
+       - The global secondary index with genre as the partition key and title as the sort key to serve the third requirement.
 
     </details>
 
@@ -362,7 +370,7 @@
     - [ ] C. Use AWS Certificate Manager (ACM) to enable encryption on the unencrypted AMIs. Copy the encrypted AMIs to the destination Region.
     - [ ] D. Copy the unencrypted AMIs to the destination Region. Enable encryption by default in the destination Region.
 
-       <summary>Answer</summary>
+    <summary>Answer</summary>
 
        B.
       - A. Creating new AMIs with encryption enabled and then copying them to the destination region is feasible. However, you cannot directly specify encryption parameters on the source AMIs if they are already created and unencrypted. This option implies creating new encrypted AMIs from the instances and then copying them to the destination region, which is plausible but may not be the most straightforward solution.

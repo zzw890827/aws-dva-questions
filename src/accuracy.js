@@ -1,14 +1,14 @@
 option = {
   title: {
     left: 'center',
-    text: '测试1正确率推移',
+    text: 'Set 01 accuracy',
   },
   tooltip: {
     trigger: 'axis',
   },
   xAxis: {
     type: 'category',
-    data: ['第一回'],
+    data: ['1st', '2nd'],
   },
   yAxis: {
     type: 'value',
@@ -19,7 +19,7 @@ option = {
   },
   series: [
     {
-      data: [74.3],
+      data: [74.3, 77.1],
       type: 'line',
       markLine: {
         symbol: ['none', 'none'],

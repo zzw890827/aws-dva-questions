@@ -2,9 +2,9 @@
 
 ## Set 01
 
-![01](./img/result_01.png)
+![01](./img/wa_01.png)
 
-![01](./img/rate_01.png)
+![01](./img/accuracy_01.png)
 
 ## Set 02
 
