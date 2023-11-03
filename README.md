@@ -8,7 +8,7 @@
 
 ## Set 02
 
-![02](./img/wrong_02.png)
+![02](./img/wa_02.png)
 ![02](./img/accuracy_02.png)
 
 ## Set 03

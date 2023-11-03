@@ -48,8 +48,9 @@ option = {
     trigger: 'axis',
   },
   xAxis: {
-    type: 'category',
-    data: ['1st'],
+    data: ['1st', '2nd'],
+    boundaryGap: false,
+    
   },
   yAxis: {
     type: 'value',
@@ -60,7 +61,7 @@ option = {
   },
   series: [
     {
-      data: [77.1],
+      data: [77.1, 72.6],
       type: 'line',
       markLine: {
         symbol: ['none', 'none'],
