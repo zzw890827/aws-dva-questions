@@ -50,6 +50,7 @@ option = {
   xAxis: {
     data: ['1st', '2nd'],
     boundaryGap: false,
+    type: 'category',
     
   },
   yAxis: {
@@ -90,7 +91,8 @@ option = {
   },
   xAxis: {
     type: 'category',
-    data: ['1st'],
+    boundaryGap: false,
+    data: ['1st', '2nd'],
   },
   yAxis: {
     type: 'value',
@@ -101,7 +103,7 @@ option = {
   },
   series: [
     {
-      data: [68.6],
+      data: [68.6, 71.4],
       type: 'line',
       markLine: {
         symbol: ['none', 'none'],

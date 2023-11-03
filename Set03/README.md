@@ -406,13 +406,14 @@
     - [ ] C. Use an AWS Lambda function that is invoked by an Amazon EventBridge (Amazon CloudWatch Events) scheduled event.
     - [ ] D. Use an AWS Batch job that is submitted to an AWS Batch job queue.
 
-    <summary>Answer</summary>
+    <details>
+       <summary>Answer</summary>
 
        C.
 
     </details>
 
-28. A developer is building a serverless application that is based on AWS Lambda. The developer initializes the AWS software development kit (SDK) outside of the Lambda handler function. What is the **PRIMARY** benefit of this action?
+28. A developer is building a serverless application that is based on AWS Lambda. The developer initializes the AWS software development kit (SDK) outside of the Lambda handler function. What is the PRIMARY benefit of this action?
     - [ ] A. Improves legibility and stylistic convention
     - [ ] B. Takes advantage of runtime environment reuse
     - [ ] C. Provides better error handling
