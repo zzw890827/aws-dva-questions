@@ -344,6 +344,7 @@
     - [ ] B. Use RDS with multi-AZ deployment.
     - [ ] C. Add a connection string to use an RDS read replica for read queries.
     - [ ] D. Add a connection string to use a read replica on an EC2 instance.
+
     <details>
        <summary>Answer</summary>
 
@@ -369,8 +370,9 @@
     - [ ] B. Use AWS Key Management Service (AWS KMS) to enable encryption on the unencrypted AMIs. Copy the encrypted AMIs to the destination Region.
     - [ ] C. Use AWS Certificate Manager (ACM) to enable encryption on the unencrypted AMIs. Copy the encrypted AMIs to the destination Region.
     - [ ] D. Copy the unencrypted AMIs to the destination Region. Enable encryption by default in the destination Region.
-
-    <summary>Answer</summary>
+   
+    </details>
+       <summary>Answer</summary>
 
        B.
       - A. Creating new AMIs with encryption enabled and then copying them to the destination region is feasible. However, you cannot directly specify encryption parameters on the source AMIs if they are already created and unencrypted. This option implies creating new encrypted AMIs from the instances and then copying them to the destination region, which is plausible but may not be the most straightforward solution.
