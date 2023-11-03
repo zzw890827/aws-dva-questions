@@ -9,6 +9,7 @@ option = {
   xAxis: {
     type: 'category',
     data: ['1st', '2nd'],
+    boundaryGap: false,
   },
   yAxis: {
     type: 'value',
