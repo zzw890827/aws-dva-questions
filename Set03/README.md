@@ -902,10 +902,7 @@
        <summary>Answer</summary>
 
        A.
-       - A: Memcached is a popular in-memory key-value store that can be used to cache frequently accessed data. This option is a straightforward way to add a caching layer in front of the RDS instance to improve read performance.
-       - B: This option involves replicating data from RDS to DynamoDB and then setting up DAX. This is a much more complex solution as it requires data synchronization between two different types of databases (RDS and DynamoDB) and introduces added complexity of managing DAX.
-       - C: While Multi-AZ deployment provides high availability by replicating data to a standby instance in another availability zone, the standby cannot be used to serve read requests. It's only for failover purposes.
-       - D:Redis is another in-memory key-value store, similar to Memcached. Redis supports more complex data types compared to Memcached and offers persistence, but for a simple caching requirement, both are viable options.
+       While both Memcached and Redis (option D) are suitable for caching, Memcached is often considered simpler to use for straightforward caching scenarios and may require less complexity in setup and management compared to Redis, which has more advanced features.ß
 
     </details>
 
