@@ -373,7 +373,8 @@ Which CodeCommit event will meet these requirements?
     - [ ] C. Create an alias for the Lambda function. Configure provisioned concurrency for the application to use.
     - [ ] D. Refactor the Lambda function into two functions. Configure one function to store the data in the DynamoDB table. Configure the second function to process the data and update the items after the data is stored in DynamoDB. Create a DynamoDB stream to invoke the second function after the data is stored.
 
-    <summary>Answer</summary>
+    <details>
+       <summary>Answer</summary>
 
        A.
        - A: By refactoring the Lambda function into two and introducing an SQS queue, we're creating a buffer mechanism. This allows for more consistent data loading into DynamoDB, as data can be dequeued and processed at a controlled rate. If traffic surges occur, SQS can hold the data until the Lambda function can catch up, preventing immediate overloading of the DynamoDB table. This seems like a viable solution.
