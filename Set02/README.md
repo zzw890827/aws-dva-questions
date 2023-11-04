@@ -233,6 +233,8 @@ Which CodeCommit event will meet these requirements?
 
        C.
 
+       To test a specific AWS Lambda function locally that is defined using the AWS CDK, you would first synthesize the template using cdk synth, which outputs the AWS CloudFormation template for your CDK app. After that, you can use the sam local invoke command with the function's logical ID from the synthesized template to test it locally. This command allows you to run the Lambda function locally and inspect its behavior in response to specified test events.
+
     </details>
 
 17. A company's new mobile app uses Amazon API Gateway. As the development team completes a new release of its APIs, a developer must safely and transparently roll out the API change. What is the SIMPLEST solution for the developer to use for rolling out the new API version to a limited number of users through API Gateway?
@@ -494,7 +496,7 @@ Which CodeCommit event will meet these requirements?
 
        BD.
        1. The company needs an authentication process that identifies users with accounts.
-       2. 2The company needs to track guest users who eventually create an account.
+       2. The company needs to track guest users who eventually create an account.
        3. Guest users should be able to access sample content.
        4. B: Identity Pools handle the creation of unique identities for users and grant temporary AWS credentials. By configuring the identity pool to allow unauthenticated users, you are giving guest users a way to access resources with temporary AWS credentials.
        5. D: By creating separate IAM roles for authenticated and unauthenticated users, you can control the access levels based on user status. Authenticated users get access to everything, whereas unauthenticated (guest) users can only access sample content.
