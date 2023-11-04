@@ -92,7 +92,7 @@ option = {
   xAxis: {
     type: 'category',
     boundaryGap: false,
-    data: ['1st', '2nd', '3rd'],
+    data: ['1st', '2nd', '3rd', '4th'],
   },
   yAxis: {
     type: 'value',
@@ -103,7 +103,7 @@ option = {
   },
   series: [
     {
-      data: [68.6, 71.4, 87.1],
+      data: [68.6, 71.4, 87.1, 94.3],
       type: 'line',
       markLine: {
         symbol: ['none', 'none'],
