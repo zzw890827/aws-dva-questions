@@ -651,7 +651,7 @@ Which CodeCommit event will meet these requirements?
     <details>
        <summary>Answer</summary>
 
-       C.
+       A.
 
     </details>
 

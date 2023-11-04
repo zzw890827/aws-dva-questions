@@ -8,7 +8,7 @@ option = {
   },
   xAxis: {
     type: 'category',
-    data: ['1st', '2nd', '3rd'],
+    data: ['1st', '2nd', '3rd', '4th'],
     boundaryGap: false,
   },
   yAxis: {
@@ -20,7 +20,7 @@ option = {
   },
   series: [
     {
-      data: [74.3, 77.1, 87.1],
+      data: [74.3, 77.1, 87.1, 98.6],
       type: 'line',
       markLine: {
         symbol: ['none', 'none'],
@@ -48,7 +48,7 @@ option = {
     trigger: 'axis',
   },
   xAxis: {
-    data: ['1st', '2nd', '3rd'],
+    data: ['1st', '2nd', '3rd', '4th'],
     boundaryGap: false,
     type: 'category',
     
@@ -62,7 +62,7 @@ option = {
   },
   series: [
     {
-      data: [77.1, 72.6, 88.6],
+      data: [77.1, 72.6, 88.6, 90],
       type: 'line',
       markLine: {
         symbol: ['none', 'none'],
